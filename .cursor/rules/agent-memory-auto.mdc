@@ -1,0 +1,30 @@
+---
+description: Auto-save session insights to agentmemory after meaningful work
+alwaysApply: true
+---
+
+# Agent memory checkpoint (mandatory)
+
+After each **substantive** exchange with Vadim / Yehhi projects, before ending your turn:
+
+1. Call MCP `user-agentmemory` ? `memory_save` with:
+   - `project`: `yehhi-ecosystem`
+   - decisions, repo status, URLs, commit hashes, blockers
+   - **Never** store secrets (tokens, passwords, `.env` values)
+
+2. Call `memory_lesson_save` when there is a reusable lesson (workflow, legal, technical pitfall).
+
+3. Skip only for trivial one-liners (pure "ok", emoji-only, no new facts).
+
+## Licensing quick ref (Habr 2026)
+
+- Code without LICENSE on GitHub is **not** Open Source (no rights granted).
+- OSI-approved license required to call a project Open Source.
+- MIT for Yehhi bots/utilities unless dual-license/SaaS strategy needs otherwise.
+- Article: https://habr.com/ru/companies/spring_aio/articles/1044986/
+
+## Yehhi context
+
+- GitHub identity: YehhiAleksandra, email yehhialeksandra@gmail.com
+- SSH on LXC 104: `~/.ssh/github_yehhi`
+- Cyrillic in HTML: edit via Python `\u` escapes, not StrReplace
