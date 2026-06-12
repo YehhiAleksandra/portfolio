@@ -605,6 +605,14 @@ a:focus-visible {
     background: linear-gradient(180deg, var(--background), hsl(60 3% 12% / 0.88));
   }
 
+  .site-header.is-scrolled {
+    background: hsl(60 33% 97% / 0.9);
+  }
+
+  .dark .site-header.is-scrolled {
+    background: hsl(60 3% 10% / 0.92);
+  }
+
   .site-header__bar {
     display: grid;
     grid-template-columns: 1fr auto auto;
