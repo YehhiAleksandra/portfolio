@@ -21,7 +21,6 @@
   var cinemaHudFill;
   var vignette;
   var glow;
-  var callouts = [];
   var layers = [];
   var ticking = false;
 
@@ -63,29 +62,7 @@
     return 0;
   }
 
-  function updateCallouts(film) {
-    var fade = 0.06;
-
-    callouts.forEach(function (el) {
-      var from = parseFloat(el.getAttribute("data-show-from") || "0");
-      var to = parseFloat(el.getAttribute("data-show-to") || "1");
-      var opacity = 0;
-
-      if (film >= from - fade && film < from) {
-        opacity = (film - (from - fade)) / fade;
-      } else if (film >= from && film <= to) {
-        opacity = 1;
-      } else if (film > to && film <= to + fade) {
-        opacity = 1 - (film - to) / fade;
-      }
-
-      opacity = clamp(opacity, 0, 1);
-      el.style.opacity = String(opacity);
-      el.classList.toggle("is-on", opacity > 0.45);
-    });
-  }
-
-  function updatePhaseLabels(film) {
+  function applyCinemaProgress(progress) {
     var label = PHASE_LABELS[0].text;
 
     for (var i = 0; i < PHASE_LABELS.length; i += 1) {
@@ -151,7 +128,6 @@
       glow.style.opacity = "";
     }
 
-    updateCallouts(progress);
     updatePhaseLabels(progress);
   }
 
@@ -344,7 +320,6 @@
       cinemaHudFill = document.getElementById("cinema-hud-fill");
       vignette = document.getElementById("hero-vignette");
       glow = document.getElementById("hero-glow");
-      callouts = Array.prototype.slice.call(document.querySelectorAll(".hero-callout"));
 
       collectLayers();
       bindScrollCinema();

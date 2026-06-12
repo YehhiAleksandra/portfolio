@@ -200,46 +200,6 @@ body.cinema-explode .hero-cinema__glow::before {
   box-shadow: 0 0 12px hsl(200 100% 50% / 0.45);
 }
 
-.hero-callout {
-  position: absolute;
-  left: var(--callout-x, 10%);
-  top: var(--callout-y, 20%);
-  z-index: 8;
-  max-width: 240px;
-  padding: 14px 16px;
-  border: 1px solid hsl(200 90% 50% / 0.45);
-  border-radius: 14px;
-  background: hsl(60 33% 97% / 0.94);
-  box-shadow: 0 22px 44px -24px hsl(0 0% 0% / 0.4);
-  opacity: 0;
-  transform: translate3d(0, 16px, 0) scale(0.94);
-  pointer-events: none;
-}
-
-.dark .hero-callout {
-  background: hsl(60 3% 12% / 0.94);
-}
-
-.hero-callout.is-on {
-  opacity: 1;
-  transform: translate3d(0, 0, 0) scale(1);
-}
-
-.hero-callout__tag {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 10px;
-  letter-spacing: 0.2em;
-  color: var(--accent-cyan);
-}
-
-.hero-callout p {
-  margin: 0;
-  font-size: 13px;
-  line-height: 1.45;
-  color: var(--card-foreground);
-}
-
 .scroll-hint {
   position: fixed;
   left: 50%;
@@ -293,10 +253,6 @@ body.cinema-active .scroll-hint {
 @media (max-width: 980px) {
   .hero-cinema {
     height: 200vh;
-  }
-
-  .hero-callout {
-    display: none;
   }
 
   .cinema-hud {
