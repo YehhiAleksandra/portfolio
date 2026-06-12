@@ -18,11 +18,11 @@
     };
 
   var commands = [
-    "./scripts/free_cinematic.sh",
-    "ffmpeg -i axis-node-scrub.mp4",
-    "python3 scripts/write_html.py",
+    "python bot.py --deploy",
     "systemctl status telegram-worker",
-    "git push origin main",
+    "docker compose up -d",
+    "ansible-playbook servers.yml",
+    "curl /health | jq .status",
   ];
 
   var commandIndex = 0;
@@ -127,10 +127,7 @@
     }
 
     var scrollable = document.documentElement.scrollHeight - window.innerHeight;
-    var scrollTop =
-      window.portfolioLenis && typeof window.portfolioLenis.scroll === "number"
-        ? window.portfolioLenis.scroll
-        : window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    var scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
     var progress = scrollable > 0 ? clamp(scrollTop / scrollable, 0, 1) : 0;
 
     progressBar.style.width = progress * 100 + "%";
@@ -213,48 +210,18 @@
     }
 
     Array.prototype.forEach.call(revealItems, function (item, index) {
-      if (revealStates[index] === "done") {
-        return;
-      }
-
       var rect = item.getBoundingClientRect();
-      var enterLine = window.innerHeight * 0.9;
+      var enterLine = window.innerHeight * 0.86;
+      var leaveTop = -window.innerHeight * 0.45;
+      var leaveBottom = window.innerHeight * 1.35;
+      var isVisible = revealStates[index];
 
-      if (rect.top < enterLine && rect.bottom > 0) {
-        revealStates[index] = "done";
+      if (!isVisible && rect.top < enterLine && rect.bottom > 0) {
+        revealStates[index] = true;
         item.classList.add("is-visible");
-      }
-    });
-  }
-
-  function initRevealObserver() {
-    if (!revealItems.length || !("IntersectionObserver" in window)) {
-      updateRevealItems();
-      return;
-    }
-
-    var observer = new IntersectionObserver(
-      function (entries) {
-        Array.prototype.forEach.call(entries, function (entry) {
-          if (!entry.isIntersecting) {
-            return;
-          }
-
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        });
-      },
-      {
-        root: null,
-        threshold: 0.12,
-        rootMargin: "0px 0px -8% 0px",
-      }
-    );
-
-    Array.prototype.forEach.call(revealItems, function (item, index) {
-      revealStates[index] = item.classList.contains("is-visible") ? "done" : "pending";
-      if (revealStates[index] !== "done") {
-        observer.observe(item);
+      } else if (isVisible && (rect.bottom < leaveTop || rect.top > leaveBottom)) {
+        revealStates[index] = false;
+        item.classList.remove("is-visible");
       }
     });
   }
@@ -265,19 +232,19 @@
     });
   } else {
     Array.prototype.forEach.call(revealItems, function () {
-      revealStates.push("pending");
+      revealStates.push(false);
     });
-    initRevealObserver();
   }
 
-  function onScrollTick() {
-    requestPipelineUpdate();
-    updateScrollUI();
-    updateRevealItems();
-  }
-
-  window.addEventListener("scroll", onScrollTick, { passive: true });
-  window.addEventListener("portfolio:scroll", onScrollTick);
+  window.addEventListener(
+    "scroll",
+    function () {
+      requestPipelineUpdate();
+      updateScrollUI();
+      updateRevealItems();
+    },
+    { passive: true }
+  );
 
   window.addEventListener("resize", function () {
     requestPipelineUpdate();
@@ -292,11 +259,6 @@
     updateScrollUI();
     updateRevealItems();
   });
-
-  window.portfolioRefreshMotion = function () {
-    onScrollTick();
-    updateRevealItems();
-  };
 
   if (document.fonts) {
     document.fonts.ready.then(updatePipelinePosition);

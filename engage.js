@@ -168,40 +168,12 @@
         }
       })
       .catch(function () {
-        var fallback = [
-          {
-            tag: "motion",
-            title: currentLocale === "en" ? "Cinematic UX polish" : "Киношный UX",
-            body:
-              currentLocale === "en"
-                ? "Lenis smooth scroll, film grain, gradient progress bar and hero entrance animations."
-                : "Lenis, film grain, градиентный прогресс-бар и анимация входа в hero.",
-          },
-          {
-            tag: "site",
-            title: currentLocale === "en" ? "Portfolio refresh" : "Обновление портфолио",
-            body:
-              currentLocale === "en"
-                ? "Header compacts on scroll, section reveals with Royal Pop easing."
-                : "Компактный header при скролле, reveal-секции с Royal Pop easing.",
-          },
-        ];
-        changelog.innerHTML = fallback
-          .map(function (update) {
-            return (
-              '<article><span>' +
-              tagLabel(update.tag) +
-              "</span><h4>" +
-              update.title +
-              "</h4><p>" +
-              update.body +
-              "</p></article>"
-            );
-          })
-          .join("");
-        if (window.portfolioTypography) {
-          window.portfolioTypography.apply(changelog);
-        }
+        changelog.innerHTML =
+          '<p class="work-db-loading">' +
+          (currentLocale === "en"
+            ? "Updates will appear here soon."
+            : "Обновления скоро появятся здесь.") +
+          "</p>";
       });
   }
 
