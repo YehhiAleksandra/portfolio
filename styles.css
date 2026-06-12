@@ -963,7 +963,14 @@ h3 {
   object-fit: contain;
   filter: drop-shadow(0 34px 38px hsl(0 0% 0% / 0.24));
   transform: rotate(1deg);
+}
+
+.hero:not(.is-ready) .hero-character {
   animation: characterFloat 7s ease-in-out infinite;
+}
+
+.cinema-layer.hero-character {
+  animation: none !important;
 }
 
 .terminal-scene picture {

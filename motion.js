@@ -129,6 +129,10 @@
   }
 
   function initHeroParallax() {
+    if (window.portfolioCinematicActive) {
+      return;
+    }
+
     var scene = document.querySelector(".hero .terminal-scene");
     if (!scene || REDUCED_MOTION) {
       return;

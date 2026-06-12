@@ -2,11 +2,12 @@
   window.portfolioCinematicPending = true;
 
   var REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var CAN_PIN = window.matchMedia("(min-width: 901px)").matches;
   var PHASE_LABELS = [
-    { until: 0.22, text: "?????" },
-    { until: 0.48, text: "????????" },
-    { until: 0.72, text: "????????" },
-    { until: 1, text: "??????" },
+    { until: 0.22, text: "\u041e\u0431\u0437\u043e\u0440" },
+    { until: 0.48, text: "\u041f\u0430\u0439\u043f\u043b\u0430\u0439\u043d" },
+    { until: 0.72, text: "\u0420\u0430\u0437\u0431\u043e\u0440\u043a\u0430" },
+    { until: 1, text: "\u0414\u0435\u043f\u043b\u043e\u0439" },
   ];
 
   var loader;
@@ -21,7 +22,7 @@
   var glow;
   var callouts = [];
   var layers = [];
-  var scrollTriggerReady = false;
+  var cinemaTrigger = null;
 
   function explodeCurve(film) {
     if (film < 0.16) {
@@ -87,10 +88,6 @@
       scrollHint.classList.toggle("is-hidden", progress > 0.06);
     }
 
-    if (terminalScene) {
-      terminalScene.style.clipPath = "circle(92% at 50% 50%)";
-    }
-
     layers.forEach(function (layer) {
       var tx = layer.x * e;
       var ty = layer.y * e;
@@ -128,18 +125,47 @@
     }
 
     loader.classList.add("is-hidden");
+    document.body.classList.remove("cinema-booting");
     window.setTimeout(function () {
       loader.setAttribute("aria-hidden", "true");
     }, 700);
   }
 
+  function forceVisibleFallback() {
+    hideLoader();
+    if (hero) {
+      hero.classList.add("is-entered", "is-ready");
+    }
+    if (terminalScene) {
+      terminalScene.style.clipPath = "none";
+      terminalScene.style.opacity = "1";
+      terminalScene.style.transform = "none";
+    }
+    window.portfolioCinematicPending = false;
+    window.dispatchEvent(new CustomEvent("portfolio:cinematic-ready"));
+  }
+
   function runLoader(done) {
     loader = document.getElementById("page-loader");
     loaderFill = document.getElementById("page-loader-fill");
+    document.body.classList.add("cinema-booting");
 
-    if (!loader || REDUCED_MOTION) {
+    var safety = window.setTimeout(function () {
+      safety = null;
+      forceVisibleFallback();
+    }, 4500);
+
+    function finish() {
+      if (safety) {
+        window.clearTimeout(safety);
+        safety = null;
+      }
       hideLoader();
       done();
+    }
+
+    if (!loader || REDUCED_MOTION) {
+      finish();
       return;
     }
 
@@ -152,10 +178,7 @@
         if (loaderFill) {
           loaderFill.style.width = "100%";
         }
-        window.setTimeout(function () {
-          hideLoader();
-          done();
-        }, 280);
+        window.setTimeout(finish, 280);
         return;
       }
       if (loaderFill) {
@@ -177,16 +200,19 @@
     if (terminalScene && window.gsap && !REDUCED_MOTION) {
       window.gsap.fromTo(
         terminalScene,
-        { clipPath: "circle(0% at 50% 50%)" },
+        { clipPath: "circle(0% at 50% 50%)", opacity: 0.2 },
         {
           clipPath: "circle(92% at 50% 50%)",
+          opacity: 1,
           duration: 1.15,
           ease: "power3.out",
           delay: 0.12,
+          clearProps: "opacity",
         }
       );
     } else if (terminalScene) {
       terminalScene.style.clipPath = "circle(92% at 50% 50%)";
+      terminalScene.style.opacity = "1";
     }
 
     var metrics = hero.querySelectorAll(".hero-metrics strong");
@@ -225,12 +251,14 @@
     layers = [];
     var character = document.querySelector(".hero-character");
     var terminal = document.querySelector(".terminal-window");
-    var badges = document.querySelectorAll(".floating-badge");
+    var badges = document.querySelectorAll(".hero-cinema .floating-badge");
 
     if (character) {
+      character.classList.add("cinema-layer");
       layers.push({ el: character, x: -42, y: -68, r: -7, s: 0.12, o0: 1, o1: 0.55 });
     }
     if (terminal) {
+      terminal.classList.add("cinema-layer");
       layers.push({ el: terminal, x: 56, y: 38, r: 5, s: 0.08, o0: 1, o1: 0.85 });
     }
 
@@ -253,69 +281,111 @@
         o1: 0.35,
       });
     });
+  }
 
-    if (terminal) {
-      terminal.classList.add("cinema-layer");
+  function setupLenisScrollTrigger() {
+    if (!window.gsap || !window.ScrollTrigger || !window.portfolioLenis) {
+      return;
     }
-    if (character) {
-      character.classList.add("cinema-layer");
+
+    var lenis = window.portfolioLenis;
+    var root = document.documentElement;
+
+    window.gsap.registerPlugin(window.ScrollTrigger);
+
+    if (!window.portfolioLenisScrollTriggerLinked) {
+      lenis.on("scroll", window.ScrollTrigger.update);
+      window.portfolioLenisScrollTriggerLinked = true;
     }
+
+    window.ScrollTrigger.scrollerProxy(root, {
+      scrollTop: function (value) {
+        if (arguments.length) {
+          lenis.scrollTo(value, { immediate: true });
+        }
+        return lenis.scroll;
+      },
+      getBoundingClientRect: function () {
+        return {
+          top: 0,
+          left: 0,
+          width: window.innerWidth,
+          height: window.innerHeight,
+        };
+      },
+      pinType: root.style.transform ? "transform" : "fixed",
+    });
+
+    window.ScrollTrigger.addEventListener("refresh", function () {
+      lenis.resize();
+    });
+
+    window.ScrollTrigger.defaults({ scroller: root });
   }
 
   function initScrollCinema() {
     if (!window.gsap || !window.ScrollTrigger || !heroCinema || REDUCED_MOTION) {
       applyCinemaProgress(0);
-      if (terminalScene) {
-        terminalScene.style.clipPath = "none";
-      }
       return;
     }
 
-    window.gsap.registerPlugin(window.ScrollTrigger);
+    setupLenisScrollTrigger();
 
-    if (window.portfolioLenis) {
-      window.portfolioLenis.on("scroll", window.ScrollTrigger.update);
-    }
-
-    window.ScrollTrigger.create({
+    var config = {
       trigger: heroCinema,
       start: "top top",
-      end: "+=155%",
-      pin: ".hero-pin",
-      pinSpacing: true,
-      scrub: 0.65,
+      end: CAN_PIN ? "+=155%" : "+=90%",
+      scrub: 0.55,
       anticipatePin: 1,
+      invalidateOnRefresh: true,
       onUpdate: function (self) {
         applyCinemaProgress(self.progress);
       },
+    };
+
+    if (CAN_PIN) {
+      config.pin = ".hero-pin";
+      config.pinSpacing = true;
+    }
+
+    cinemaTrigger = window.ScrollTrigger.create(config);
+
+    window.addEventListener("resize", function () {
+      window.ScrollTrigger.refresh();
     });
 
-    scrollTriggerReady = true;
-    window.ScrollTrigger.refresh();
+    window.setTimeout(function () {
+      window.ScrollTrigger.refresh();
+    }, 400);
   }
 
   function boot() {
-    heroCinema = document.getElementById("hero-cinema");
-    hero = document.querySelector(".hero");
-    terminalScene = document.querySelector(".terminal-scene");
-    scrollHint = document.getElementById("scroll-hint");
-    filmPhase = document.getElementById("film-phase");
-    filmPhaseLabel = document.getElementById("film-phase-label");
-    vignette = document.getElementById("hero-vignette");
-    glow = document.getElementById("hero-glow");
-    callouts = Array.prototype.slice.call(document.querySelectorAll(".hero-callout"));
+    try {
+      heroCinema = document.getElementById("hero-cinema");
+      hero = document.querySelector(".hero");
+      terminalScene = document.querySelector(".hero-cinema .terminal-scene");
+      scrollHint = document.getElementById("scroll-hint");
+      filmPhase = document.getElementById("film-phase");
+      filmPhaseLabel = document.getElementById("film-phase-label");
+      vignette = document.getElementById("hero-vignette");
+      glow = document.getElementById("hero-glow");
+      callouts = Array.prototype.slice.call(document.querySelectorAll(".hero-callout"));
 
-    collectLayers();
+      collectLayers();
 
-    runLoader(function () {
-      finishHeroEntrance();
-      initScrollCinema();
-      window.portfolioCinematicPending = false;
-      window.dispatchEvent(new CustomEvent("portfolio:cinematic-ready"));
-      if (window.portfolioRefreshMotion) {
-        window.portfolioRefreshMotion();
-      }
-    });
+      runLoader(function () {
+        finishHeroEntrance();
+        initScrollCinema();
+        window.portfolioCinematicPending = false;
+        window.portfolioCinematicActive = true;
+        window.dispatchEvent(new CustomEvent("portfolio:cinematic-ready"));
+        if (window.portfolioRefreshMotion) {
+          window.portfolioRefreshMotion();
+        }
+      });
+    } catch (error) {
+      forceVisibleFallback();
+    }
   }
 
   if (document.readyState === "loading") {

@@ -13,6 +13,16 @@
   transition: opacity 0.65s ease, visibility 0.65s ease;
 }
 
+body.cinema-booting .hero-copy > *,
+body.cinema-booting .hero .terminal-scene {
+  opacity: 0;
+}
+
+body.cinema-booting .page-loader {
+  opacity: 1;
+  visibility: visible;
+}
+
 .page-loader.is-hidden {
   opacity: 0;
   visibility: hidden;
