@@ -218,8 +218,8 @@
       return;
     }
 
-    var showAt = 0.14;
-    var hideAt = 0.06;
+    var showAt = 0.12;
+    var hideAt = 0.04;
 
     Array.prototype.forEach.call(revealItems, function (item, index) {
       var rect = item.getBoundingClientRect();
