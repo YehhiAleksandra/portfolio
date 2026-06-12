@@ -45,8 +45,8 @@
       href="https://fonts.googleapis.com/css2?family=Lora:wght@400&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=20260612e" />
-    <link rel="stylesheet" href="./cinematic.css?v=20260612e" />
+    <link rel="stylesheet" href="./styles.css?v=20260613a" />
+    <link rel="stylesheet" href="./cinematic.css?v=20260613a" />
     <script type="application/ld+json" id="person-jsonld">
       {
         "@context": "https://schema.org",
@@ -107,6 +107,11 @@
     </div>
     <div class="scroll-progress" aria-hidden="true"><span></span></div>
     <div class="grain" aria-hidden="true"></div>
+    <div class="cinema-hud" id="cinema-hud" aria-live="polite" aria-hidden="true">
+      <span class="cinema-hud__label">Royal Pop scene</span>
+      <p class="cinema-hud__phase" id="cinema-hud-phase">Обзор</p>
+      <div class="cinema-hud__bar"><span id="cinema-hud-fill"></span></div>
+    </div>
     <header class="site-header">
       <div class="site-header__bar">
         <a class="brand" href="#top" aria-label="На главную" data-i18n-aria="brandHome" data-i18n="brand">Yehhi Aleksandra</a>
@@ -225,11 +230,8 @@
       </section>
         </div>
         <div class="scroll-hint" id="scroll-hint">
-          <span data-i18n="scrollHint">Прокрутка</span>
+          <span data-i18n="scrollHint">Прокрутка — смотри разборку</span>
           <span class="scroll-hint__line" aria-hidden="true"></span>
-        </div>
-        <div class="film-phase" id="film-phase" aria-live="polite">
-          <span id="film-phase-label">Обзор</span>
         </div>
       </section>
 
@@ -743,11 +745,9 @@
     <script src="./workdb.js"></script>
     <script src="./engage.js"></script>
     <script src="./contact-form.js"></script>
-    <script src="./assets/gsap.min.js?v=20260612e"></script>
-    <script src="./assets/ScrollTrigger.min.js?v=20260612e"></script>
-    <script src="./assets/lenis.min.js?v=20260612e"></script>
-    <script src="./motion.js?v=20260612e"></script>
-    <script src="./cinematic.js?v=20260612e"></script>
+    <script src="./assets/lenis.min.js?v=20260613a"></script>
+    <script src="./motion.js?v=20260613a"></script>
+    <script src="./cinematic.js?v=20260613a"></script>
     <script src="./script.js"></script>
   </body>
 </html>

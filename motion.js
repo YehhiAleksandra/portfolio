@@ -108,14 +108,6 @@
     });
 
     function startLenisLoop() {
-      if (window.gsap && window.gsap.ticker) {
-        window.gsap.ticker.add(function (time) {
-          lenis.raf(time * 1000);
-        });
-        window.gsap.ticker.lagSmoothing(0);
-        return;
-      }
-
       function raf(time) {
         lenis.raf(time);
         window.requestAnimationFrame(raf);

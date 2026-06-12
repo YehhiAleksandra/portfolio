@@ -2,7 +2,6 @@
   window.portfolioCinematicPending = true;
 
   var REDUCED_MOTION = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var CAN_PIN = window.matchMedia("(min-width: 901px)").matches;
   var PHASE_LABELS = [
     { until: 0.22, text: "\u041e\u0431\u0437\u043e\u0440" },
     { until: 0.48, text: "\u041f\u0430\u0439\u043f\u043b\u0430\u0439\u043d" },
@@ -14,31 +13,58 @@
   var loaderFill;
   var heroCinema;
   var hero;
+  var heroPin;
   var terminalScene;
   var scrollHint;
-  var filmPhase;
-  var filmPhaseLabel;
+  var cinemaHud;
+  var cinemaHudPhase;
+  var cinemaHudFill;
   var vignette;
   var glow;
   var callouts = [];
   var layers = [];
-  var cinemaTrigger = null;
+  var ticking = false;
+
+  function clamp(value, min, max) {
+    return Math.min(Math.max(value, min), max);
+  }
+
+  function getScrollTop() {
+    if (window.portfolioLenis && typeof window.portfolioLenis.scroll === "number") {
+      return window.portfolioLenis.scroll;
+    }
+    return window.scrollY || document.documentElement.scrollTop || 0;
+  }
+
+  function getHeroProgress() {
+    if (!heroCinema) {
+      return 0;
+    }
+
+    var rect = heroCinema.getBoundingClientRect();
+    var scrollable = heroCinema.offsetHeight - window.innerHeight;
+    if (scrollable <= 0) {
+      return 0;
+    }
+
+    return clamp(-rect.top / scrollable, 0, 1);
+  }
 
   function explodeCurve(film) {
-    if (film < 0.16) {
-      return Math.pow(film / 0.16, 2.4);
+    if (film < 0.12) {
+      return Math.pow(film / 0.12, 1.8);
     }
-    if (film < 0.54) {
+    if (film < 0.58) {
       return 1;
     }
-    if (film < 0.74) {
-      return 1 - Math.pow((film - 0.54) / 0.2, 2.2);
+    if (film < 0.82) {
+      return 1 - Math.pow((film - 0.58) / 0.24, 1.8);
     }
     return 0;
   }
 
   function updateCallouts(film) {
-    var fade = 0.05;
+    var fade = 0.06;
 
     callouts.forEach(function (el) {
       var from = parseFloat(el.getAttribute("data-show-from") || "0");
@@ -53,39 +79,44 @@
         opacity = 1 - (film - to) / fade;
       }
 
-      opacity = Math.max(0, Math.min(1, opacity));
+      opacity = clamp(opacity, 0, 1);
       el.style.opacity = String(opacity);
       el.classList.toggle("is-on", opacity > 0.45);
     });
   }
 
-  function updateFilmPhase(film) {
-    if (!filmPhase || !filmPhaseLabel) {
-      return;
-    }
-
-    var show = film > 0.05 && film < 0.92;
-    filmPhase.classList.toggle("is-visible", show);
-    if (!show) {
-      return;
-    }
+  function updatePhaseLabels(film) {
+    var label = PHASE_LABELS[0].text;
 
     for (var i = 0; i < PHASE_LABELS.length; i += 1) {
       if (film <= PHASE_LABELS[i].until) {
-        if (filmPhaseLabel.textContent !== PHASE_LABELS[i].text) {
-          filmPhaseLabel.textContent = PHASE_LABELS[i].text;
-        }
+        label = PHASE_LABELS[i].text;
         break;
       }
+    }
+
+    if (cinemaHudPhase) {
+      cinemaHudPhase.textContent = label;
     }
   }
 
   function applyCinemaProgress(progress) {
     var e = explodeCurve(progress);
-    document.body.classList.toggle("cinema-explode", e > 0.3);
+    document.body.classList.toggle("cinema-explode", e > 0.25);
+    document.body.classList.toggle("cinema-active", progress > 0.02 && progress < 0.98);
 
     if (scrollHint) {
-      scrollHint.classList.toggle("is-hidden", progress > 0.06);
+      scrollHint.classList.toggle("is-hidden", progress > 0.05);
+    }
+
+    if (cinemaHud) {
+      var hudVisible = progress > 0.02 && progress < 0.98;
+      cinemaHud.classList.toggle("is-visible", hudVisible);
+      cinemaHud.setAttribute("aria-hidden", hudVisible ? "false" : "true");
+    }
+
+    if (cinemaHudFill) {
+      cinemaHudFill.style.width = progress * 100 + "%";
     }
 
     layers.forEach(function (layer) {
@@ -102,21 +133,38 @@
     if (hero) {
       var copy = hero.querySelector(".hero-copy");
       if (copy) {
-        copy.style.opacity = String(Math.max(0, 1 - progress * 1.8));
-        copy.style.transform = "translate3d(0, " + progress * 48 + "px, 0)";
+        copy.style.opacity = String(Math.max(0, 1 - progress * 2.2));
+        copy.style.transform = "translate3d(0, " + progress * 72 + "px, 0) scale(" + (1 - progress * 0.06) + ")";
+        copy.style.filter = "blur(" + progress * 4 + "px)";
       }
     }
 
+    if (terminalScene) {
+      terminalScene.style.filter = "blur(" + Math.max(0, (e - 0.65) * 8) + "px)";
+    }
+
     if (vignette) {
-      vignette.style.opacity = String(0.08 + e * 0.35);
+      vignette.style.opacity = "";
     }
 
     if (glow) {
-      glow.style.opacity = String(e * 0.95);
+      glow.style.opacity = "";
     }
 
     updateCallouts(progress);
-    updateFilmPhase(progress);
+    updatePhaseLabels(progress);
+  }
+
+  function requestCinemaTick() {
+    if (ticking) {
+      return;
+    }
+
+    ticking = true;
+    window.requestAnimationFrame(function () {
+      ticking = false;
+      applyCinemaProgress(getHeroProgress());
+    });
   }
 
   function hideLoader() {
@@ -137,12 +185,31 @@
       hero.classList.add("is-entered", "is-ready");
     }
     if (terminalScene) {
-      terminalScene.style.clipPath = "none";
+      terminalScene.style.clipPath = "circle(92% at 50% 50%)";
       terminalScene.style.opacity = "1";
-      terminalScene.style.transform = "none";
     }
     window.portfolioCinematicPending = false;
+    window.portfolioCinematicActive = true;
     window.dispatchEvent(new CustomEvent("portfolio:cinematic-ready"));
+  }
+
+  function animateCounter(node, target, suffix) {
+    var start = null;
+    var duration = 1200;
+
+    function step(ts) {
+      if (!start) {
+        start = ts;
+      }
+      var p = clamp((ts - start) / duration, 0, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      node.textContent = Math.round(target * eased) + suffix;
+      if (p < 1) {
+        window.requestAnimationFrame(step);
+      }
+    }
+
+    window.requestAnimationFrame(step);
   }
 
   function runLoader(done) {
@@ -150,41 +217,43 @@
     loaderFill = document.getElementById("page-loader-fill");
     document.body.classList.add("cinema-booting");
 
-    var safety = window.setTimeout(function () {
-      safety = null;
-      forceVisibleFallback();
-    }, 4500);
+    var safety = window.setTimeout(forceVisibleFallback, 5000);
+    var started = Date.now();
+    var minDuration = REDUCED_MOTION ? 0 : 1600;
 
     function finish() {
-      if (safety) {
-        window.clearTimeout(safety);
-        safety = null;
-      }
-      hideLoader();
-      done();
+      window.clearTimeout(safety);
+      var wait = Math.max(0, minDuration - (Date.now() - started));
+      window.setTimeout(function () {
+        hideLoader();
+        done();
+      }, wait);
     }
 
     if (!loader || REDUCED_MOTION) {
+      if (loaderFill) {
+        loaderFill.style.width = "100%";
+      }
       finish();
       return;
     }
 
     var progress = 0;
     var timer = window.setInterval(function () {
-      progress += 8 + Math.random() * 10;
+      progress += 6 + Math.random() * 8;
       if (progress >= 100) {
         progress = 100;
         window.clearInterval(timer);
         if (loaderFill) {
           loaderFill.style.width = "100%";
         }
-        window.setTimeout(finish, 280);
+        finish();
         return;
       }
       if (loaderFill) {
         loaderFill.style.width = progress + "%";
       }
-    }, 70);
+    }, 80);
   }
 
   function finishHeroEntrance() {
@@ -195,48 +264,21 @@
     hero.classList.add("is-entered");
     window.setTimeout(function () {
       hero.classList.add("is-ready");
-    }, 1100);
+    }, 1200);
 
-    if (terminalScene && window.gsap && !REDUCED_MOTION) {
-      window.gsap.fromTo(
-        terminalScene,
-        { clipPath: "circle(0% at 50% 50%)", opacity: 0.2 },
-        {
-          clipPath: "circle(92% at 50% 50%)",
-          opacity: 1,
-          duration: 1.15,
-          ease: "power3.out",
-          delay: 0.12,
-          clearProps: "opacity",
-        }
-      );
-    } else if (terminalScene) {
+    if (terminalScene) {
       terminalScene.style.clipPath = "circle(92% at 50% 50%)";
-      terminalScene.style.opacity = "1";
     }
 
     var metrics = hero.querySelectorAll(".hero-metrics strong");
-    if (window.gsap && metrics.length && !REDUCED_MOTION) {
-      metrics.forEach(function (node) {
-        var raw = (node.textContent || "").trim();
-        var match = raw.match(/^(\d+)/);
-        if (!match) {
-          return;
-        }
-        var target = parseInt(match[1], 10);
-        var suffix = raw.slice(match[1].length);
-        var counter = { value: 0 };
-        window.gsap.to(counter, {
-          value: target,
-          duration: 1.4,
-          ease: "power2.out",
-          delay: 0.35,
-          onUpdate: function () {
-            node.textContent = Math.round(counter.value) + suffix;
-          },
-        });
-      });
-    }
+    Array.prototype.forEach.call(metrics, function (node) {
+      var raw = (node.textContent || "").trim();
+      var match = raw.match(/^(\d+)/);
+      if (!match || REDUCED_MOTION) {
+        return;
+      }
+      animateCounter(node, parseInt(match[1], 10), raw.slice(match[1].length));
+    });
 
     var bar = document.querySelector(".scroll-progress span");
     if (bar && !REDUCED_MOTION) {
@@ -255,130 +297,64 @@
 
     if (character) {
       character.classList.add("cinema-layer");
-      layers.push({ el: character, x: -42, y: -68, r: -7, s: 0.12, o0: 1, o1: 0.55 });
+      layers.push({ el: character, x: -130, y: -150, r: -14, s: 0.22, o0: 1, o1: 0.35 });
     }
     if (terminal) {
       terminal.classList.add("cinema-layer");
-      layers.push({ el: terminal, x: 56, y: 38, r: 5, s: 0.08, o0: 1, o1: 0.85 });
+      layers.push({ el: terminal, x: 120, y: 90, r: 10, s: 0.14, o0: 1, o1: 0.7 });
     }
 
     var badgeOffsets = [
-      { x: -88, y: -96, r: -12 },
-      { x: 72, y: -72, r: 10 },
-      { x: -64, y: 84, r: 8 },
+      { x: -140, y: -150, r: -18 },
+      { x: 130, y: -120, r: 16 },
+      { x: -110, y: 130, r: 12 },
     ];
 
     Array.prototype.forEach.call(badges, function (badge, index) {
-      var offset = badgeOffsets[index] || { x: 0, y: -60, r: 0 };
+      var offset = badgeOffsets[index] || { x: 0, y: -80, r: 0 };
       badge.classList.add("cinema-layer");
       layers.push({
         el: badge,
         x: offset.x,
         y: offset.y,
         r: offset.r,
-        s: 0.15,
+        s: 0.22,
         o0: 1,
-        o1: 0.35,
+        o1: 0.2,
       });
     });
   }
 
-  function setupLenisScrollTrigger() {
-    if (!window.gsap || !window.ScrollTrigger || !window.portfolioLenis) {
-      return;
-    }
-
-    var lenis = window.portfolioLenis;
-    var root = document.documentElement;
-
-    window.gsap.registerPlugin(window.ScrollTrigger);
-
-    if (!window.portfolioLenisScrollTriggerLinked) {
-      lenis.on("scroll", window.ScrollTrigger.update);
-      window.portfolioLenisScrollTriggerLinked = true;
-    }
-
-    window.ScrollTrigger.scrollerProxy(root, {
-      scrollTop: function (value) {
-        if (arguments.length) {
-          lenis.scrollTo(value, { immediate: true });
-        }
-        return lenis.scroll;
-      },
-      getBoundingClientRect: function () {
-        return {
-          top: 0,
-          left: 0,
-          width: window.innerWidth,
-          height: window.innerHeight,
-        };
-      },
-      pinType: root.style.transform ? "transform" : "fixed",
-    });
-
-    window.ScrollTrigger.addEventListener("refresh", function () {
-      lenis.resize();
-    });
-
-    window.ScrollTrigger.defaults({ scroller: root });
-  }
-
-  function initScrollCinema() {
-    if (!window.gsap || !window.ScrollTrigger || !heroCinema || REDUCED_MOTION) {
-      applyCinemaProgress(0);
-      return;
-    }
-
-    setupLenisScrollTrigger();
-
-    var config = {
-      trigger: heroCinema,
-      start: "top top",
-      end: CAN_PIN ? "+=155%" : "+=90%",
-      scrub: 0.55,
-      anticipatePin: 1,
-      invalidateOnRefresh: true,
-      onUpdate: function (self) {
-        applyCinemaProgress(self.progress);
-      },
-    };
-
-    if (CAN_PIN) {
-      config.pin = ".hero-pin";
-      config.pinSpacing = true;
-    }
-
-    cinemaTrigger = window.ScrollTrigger.create(config);
-
-    window.addEventListener("resize", function () {
-      window.ScrollTrigger.refresh();
-    });
-
-    window.setTimeout(function () {
-      window.ScrollTrigger.refresh();
-    }, 400);
+  function bindScrollCinema() {
+    window.addEventListener("scroll", requestCinemaTick, { passive: true });
+    window.addEventListener("portfolio:scroll", requestCinemaTick);
+    window.addEventListener("resize", requestCinemaTick);
+    requestCinemaTick();
   }
 
   function boot() {
     try {
       heroCinema = document.getElementById("hero-cinema");
+      heroPin = document.querySelector(".hero-pin");
       hero = document.querySelector(".hero");
       terminalScene = document.querySelector(".hero-cinema .terminal-scene");
       scrollHint = document.getElementById("scroll-hint");
-      filmPhase = document.getElementById("film-phase");
-      filmPhaseLabel = document.getElementById("film-phase-label");
+      cinemaHud = document.getElementById("cinema-hud");
+      cinemaHudPhase = document.getElementById("cinema-hud-phase");
+      cinemaHudFill = document.getElementById("cinema-hud-fill");
       vignette = document.getElementById("hero-vignette");
       glow = document.getElementById("hero-glow");
       callouts = Array.prototype.slice.call(document.querySelectorAll(".hero-callout"));
 
       collectLayers();
+      bindScrollCinema();
 
       runLoader(function () {
         finishHeroEntrance();
-        initScrollCinema();
         window.portfolioCinematicPending = false;
         window.portfolioCinematicActive = true;
         window.dispatchEvent(new CustomEvent("portfolio:cinematic-ready"));
+        requestCinemaTick();
         if (window.portfolioRefreshMotion) {
           window.portfolioRefreshMotion();
         }
