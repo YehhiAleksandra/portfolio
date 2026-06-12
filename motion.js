@@ -16,19 +16,36 @@
     siteHeader.classList.toggle("is-compact", scrollTop > 48);
   }
 
+  function pulseProgressBar() {
+    var bar = document.querySelector(".scroll-progress span");
+    if (!bar || REDUCED_MOTION) {
+      return;
+    }
+
+    bar.classList.add("is-pulse");
+    window.setTimeout(function () {
+      bar.classList.remove("is-pulse");
+    }, 1400);
+  }
+
   function initHeroEntrance() {
-    if (!hero || REDUCED_MOTION) {
-      if (hero) {
-        hero.classList.add("is-entered");
-      }
+    if (!hero) {
+      return;
+    }
+
+    if (REDUCED_MOTION) {
+      hero.classList.add("is-entered", "is-ready");
       return;
     }
 
     window.requestAnimationFrame(function () {
-      hero.classList.add("is-entered");
       window.setTimeout(function () {
-        hero.classList.add("is-ready");
-      }, 1200);
+        hero.classList.add("is-entered");
+        pulseProgressBar();
+        window.setTimeout(function () {
+          hero.classList.add("is-ready");
+        }, 1200);
+      }, 120);
     });
   }
 
@@ -59,6 +76,7 @@
 
   function initLenis() {
     if (REDUCED_MOTION || typeof window.Lenis !== "function") {
+      document.documentElement.classList.add("motion-fallback");
       updateHeader(window.scrollY || 0);
       window.addEventListener(
         "scroll",
@@ -71,13 +89,16 @@
     }
 
     lenis = new Lenis({
-      duration: 1.1,
+      duration: 1.35,
       easing: function (t) {
         return Math.min(1, 1.001 - Math.pow(2, -10 * t));
       },
       smoothWheel: true,
-      touchMultiplier: 1.35,
+      touchMultiplier: 1.5,
+      wheelMultiplier: 1.05,
     });
+
+    document.documentElement.classList.add("motion-ready");
 
     window.portfolioLenis = lenis;
 
