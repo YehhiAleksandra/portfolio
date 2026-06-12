@@ -18,11 +18,11 @@
     };
 
   var commands = [
-    "python bot.py --deploy",
+    "./scripts/free_cinematic.sh",
+    "ffmpeg -i axis-node-scrub.mp4",
+    "python3 scripts/write_html.py",
     "systemctl status telegram-worker",
-    "docker compose up -d",
-    "ansible-playbook servers.yml",
-    "curl /health | jq .status",
+    "git push origin main",
   ];
 
   var commandIndex = 0;

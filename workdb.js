@@ -9,7 +9,75 @@
   var modalContent = document.getElementById("project-modal-content");
   var modalClose = document.querySelector(".project-modal-close");
 
-  var fallbackProjects = [];
+  var fallbackProjects = [
+    {
+      id: 1,
+      title: "AXIS NODE",
+      client: "Портфолио-проект",
+      type: "Scroll landing",
+      status: "done",
+      progress: 100,
+      description:
+        "Premium scroll-лендинг: киношная разборка edge AI-узла. AI PNG → FFmpeg → native video scrub, GSAP + Lenis.",
+      stack: ["GSAP", "Lenis", "FFmpeg", "Python", "GitHub Pages"],
+      milestones: [
+        "Royal Pop video pipeline (free_cinematic.sh)",
+        "H.264 scrub MP4 с keyframe every frame",
+        "Production UI: callouts, marquee, mobile nav",
+      ],
+      result: "Открытый репозиторий — шаблон для новых product-лендингов.",
+      link: "https://github.com/YehhiAleksandra/axis-node-website",
+      linkLabel: "GitHub",
+    },
+    {
+      id: 2,
+      title: "NEXUS CORE X1",
+      client: "Портфолио-проект",
+      type: "Scroll landing",
+      status: "done",
+      progress: 100,
+      description:
+        "Scroll-driven лендинг без видео: procedural Canvas 2D explode/reassemble, 192 кадра на лету.",
+      stack: ["Canvas 2D", "GSAP", "Lenis", "Vanilla JS"],
+      milestones: [
+        "Procedural 3D-style renderer",
+        "Scroll-bound camera orbit",
+        "Stats + CTA без backend",
+      ],
+      result: "Лёгкая альтернатива video-scrub для fictional hardware.",
+      link: "https://github.com/YehhiAleksandra/nexus-core-website",
+      linkLabel: "GitHub",
+    },
+    {
+      id: 3,
+      title: "Portfolio + Work DB",
+      client: "Личный продукт",
+      type: "Web",
+      status: "support",
+      progress: 92,
+      description:
+        "Сайт-портфолио на GitHub Pages: i18n RU/EN, SQLite fallback, калькулятор рутины, live status.",
+      stack: ["HTML", "CSS", "JS", "GitHub Pages", "FastAPI"],
+      milestones: ["Hero + pipeline scroll", "Work DB cards", "Dark mode"],
+      result: "yehhialeksandra.github.io/portfolio",
+      link: "https://github.com/YehhiAleksandra/portfolio",
+      linkLabel: "GitHub",
+    },
+    {
+      id: 4,
+      title: "Зинаида · Telegram",
+      client: "Личный продукт",
+      type: "Bot + Mini App",
+      status: "support",
+      progress: 88,
+      description: "AI-бот: гороскопы, нумерология, mini-app на Vercel, Stars/YooKassa.",
+      stack: ["Python", "aiogram", "React", "Vercel"],
+      milestones: ["Bot live", "Mini-app deploy", "Premium vision"],
+      result: "@Zinaidadigitaloracle_bot",
+      link: "https://github.com/YehhiAleksandra/digital-oracle",
+      linkLabel: "GitHub",
+    },
+  ];
 
   var clientTranslations = {
     "Портфолио-проект": "Portfolio project",
@@ -17,7 +85,40 @@
     "Домашняя инфраструктура": "Home infrastructure",
   };
 
-  var projectTranslations = {};
+  var projectTranslations = {
+    "AXIS NODE": {
+      description:
+        "Premium scroll landing: cinematic edge AI node disassembly. AI PNG → FFmpeg → native video scrub, GSAP + Lenis.",
+      result: "Open repo — template for new product landings.",
+      milestones: [
+        "Royal Pop video pipeline (free_cinematic.sh)",
+        "H.264 scrub MP4 with per-frame keyframes",
+        "Production UI: callouts, marquee, mobile nav",
+      ],
+    },
+    "NEXUS CORE X1": {
+      description:
+        "Scroll landing without video: procedural Canvas 2D explode/reassemble, 192 frames at runtime.",
+      result: "Lightweight alternative to video-scrub for fictional hardware.",
+      milestones: [
+        "Procedural 3D-style renderer",
+        "Scroll-bound camera orbit",
+        "Stats + CTA without backend",
+      ],
+    },
+    "Portfolio + Work DB": {
+      description:
+        "Portfolio on GitHub Pages: i18n RU/EN, SQLite fallback, routine calculator, live status.",
+      result: "yehhialeksandra.github.io/portfolio",
+      milestones: ["Hero + pipeline scroll", "Work DB cards", "Dark mode"],
+    },
+    "Зинаида · Telegram": {
+      title: "Zinaida · Telegram",
+      description: "AI bot: horoscopes, numerology, Vercel mini-app, Stars/YooKassa.",
+      result: "@Zinaidadigitaloracle_bot",
+      milestones: ["Bot live", "Mini-app deploy", "Premium vision"],
+    },
+  };
 
   function localizedProject(project) {
     if (currentLocale !== "en") {

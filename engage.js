@@ -168,12 +168,40 @@
         }
       })
       .catch(function () {
-        changelog.innerHTML =
-          '<p class="work-db-loading">' +
-          (currentLocale === "en"
-            ? "Updates will appear here soon."
-            : "Обновления скоро появятся здесь.") +
-          "</p>";
+        var fallback = [
+          {
+            tag: "portfolio",
+            title: currentLocale === "en" ? "Scroll landing showcase" : "Витрина scroll-лендингов",
+            body:
+              currentLocale === "en"
+                ? "AXIS NODE and NEXUS CORE repos linked; Work DB filled with live cases."
+                : "Кейсы AXIS NODE и NEXUS CORE на GitHub; рабочая БД с живыми проектами.",
+          },
+          {
+            tag: "deploy",
+            title: currentLocale === "en" ? "New GitHub repos" : "Новые репозитории",
+            body:
+              currentLocale === "en"
+                ? "axis-node-website and nexus-core-website published under YehhiAleksandra."
+                : "axis-node-website и nexus-core-website в профиле GitHub.",
+          },
+        ];
+        changelog.innerHTML = fallback
+          .map(function (update) {
+            return (
+              '<article><span>' +
+              tagLabel(update.tag) +
+              "</span><h4>" +
+              update.title +
+              "</h4><p>" +
+              update.body +
+              "</p></article>"
+            );
+          })
+          .join("");
+        if (window.portfolioTypography) {
+          window.portfolioTypography.apply(changelog);
+        }
       });
   }
 
