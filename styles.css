@@ -115,9 +115,9 @@ body::before {
 .grain {
   position: fixed;
   inset: 0;
-  z-index: 30;
+  z-index: 1;
   pointer-events: none;
-  opacity: 0.34;
+  opacity: 0.3;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
   mix-blend-mode: multiply;
   mask-image: linear-gradient(to bottom, black 0%, black 72%, transparent 100%);
@@ -1132,6 +1132,8 @@ h3 {
   min-width: max-content;
   padding: 22px var(--page-gutter);
   animation: marquee 34s linear infinite;
+  will-change: transform;
+  animation-play-state: running;
 }
 
 .marquee-track span {
@@ -2656,12 +2658,16 @@ main {
   transition:
     opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
     transform 0.95s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal:not(.is-visible) {
   will-change: opacity, transform;
 }
 
 .reveal.is-visible {
   opacity: 1;
   transform: translate3d(0, 0, 0);
+  will-change: auto;
 }
 
 @keyframes marquee {
@@ -2714,25 +2720,33 @@ main {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  html {
     scroll-behavior: auto !important;
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
   }
 
   .reveal,
   .hero-copy > *,
   .hero .terminal-scene {
-    opacity: 1;
-    transform: none;
-    filter: none;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    transition: none !important;
+    will-change: auto !important;
   }
 
   .scroll-progress span {
-    transition: none;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .hero::after {
+    animation: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .marquee-track {
+    animation: marquee 34s linear infinite !important;
   }
 }
 

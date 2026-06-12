@@ -213,18 +213,48 @@
     }
 
     Array.prototype.forEach.call(revealItems, function (item, index) {
-      var rect = item.getBoundingClientRect();
-      var enterLine = window.innerHeight * 0.86;
-      var leaveTop = -window.innerHeight * 0.45;
-      var leaveBottom = window.innerHeight * 1.35;
-      var isVisible = revealStates[index];
+      if (revealStates[index] === "done") {
+        return;
+      }
 
-      if (!isVisible && rect.top < enterLine && rect.bottom > 0) {
-        revealStates[index] = true;
+      var rect = item.getBoundingClientRect();
+      var enterLine = window.innerHeight * 0.9;
+
+      if (rect.top < enterLine && rect.bottom > 0) {
+        revealStates[index] = "done";
         item.classList.add("is-visible");
-      } else if (isVisible && (rect.bottom < leaveTop || rect.top > leaveBottom)) {
-        revealStates[index] = false;
-        item.classList.remove("is-visible");
+      }
+    });
+  }
+
+  function initRevealObserver() {
+    if (!revealItems.length || !("IntersectionObserver" in window)) {
+      updateRevealItems();
+      return;
+    }
+
+    var observer = new IntersectionObserver(
+      function (entries) {
+        Array.prototype.forEach.call(entries, function (entry) {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        root: null,
+        threshold: 0.12,
+        rootMargin: "0px 0px -8% 0px",
+      }
+    );
+
+    Array.prototype.forEach.call(revealItems, function (item, index) {
+      revealStates[index] = item.classList.contains("is-visible") ? "done" : "pending";
+      if (revealStates[index] !== "done") {
+        observer.observe(item);
       }
     });
   }
@@ -235,8 +265,9 @@
     });
   } else {
     Array.prototype.forEach.call(revealItems, function () {
-      revealStates.push(false);
+      revealStates.push("pending");
     });
+    initRevealObserver();
   }
 
   function onScrollTick() {
@@ -261,6 +292,11 @@
     updateScrollUI();
     updateRevealItems();
   });
+
+  window.portfolioRefreshMotion = function () {
+    onScrollTick();
+    updateRevealItems();
+  };
 
   if (document.fonts) {
     document.fonts.ready.then(updatePipelinePosition);

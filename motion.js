@@ -139,6 +139,10 @@
   window.addEventListener("load", function () {
     initHeroEntrance();
     initHeroParallax();
+    dispatchScroll();
+    if (window.portfolioRefreshMotion) {
+      window.portfolioRefreshMotion();
+    }
   });
   initLenis();
 })();
