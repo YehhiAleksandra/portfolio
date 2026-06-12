@@ -207,22 +207,29 @@
     });
   }
 
+  function visibleRatio(rect) {
+    var viewportHeight = window.innerHeight;
+    var visibleHeight = Math.min(rect.bottom, viewportHeight) - Math.max(rect.top, 0);
+    return Math.max(0, visibleHeight) / Math.max(rect.height, 1);
+  }
+
   function updateRevealItems() {
     if (!revealItems.length) {
       return;
     }
 
+    var showAt = 0.14;
+    var hideAt = 0.06;
+
     Array.prototype.forEach.call(revealItems, function (item, index) {
       var rect = item.getBoundingClientRect();
-      var enterLine = window.innerHeight * 0.86;
-      var leaveTop = -window.innerHeight * 0.45;
-      var leaveBottom = window.innerHeight * 1.35;
+      var ratio = visibleRatio(rect);
       var isVisible = revealStates[index];
 
-      if (!isVisible && rect.top < enterLine && rect.bottom > 0) {
+      if (!isVisible && ratio >= showAt) {
         revealStates[index] = true;
         item.classList.add("is-visible");
-      } else if (isVisible && (rect.bottom < leaveTop || rect.top > leaveBottom)) {
+      } else if (isVisible && ratio <= hideAt) {
         revealStates[index] = false;
         item.classList.remove("is-visible");
       }
