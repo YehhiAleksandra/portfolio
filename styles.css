@@ -971,6 +971,7 @@ h3 {
   min-width: max-content;
   padding: 22px var(--page-gutter);
   animation: marquee 34s linear infinite;
+  will-change: transform;
 }
 
 .marquee-track span {
