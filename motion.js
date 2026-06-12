@@ -29,7 +29,7 @@
   }
 
   function initHeroEntrance() {
-    if (!hero) {
+    if (!hero || window.portfolioCinematicPending) {
       return;
     }
 
@@ -107,12 +107,24 @@
       dispatchScroll();
     });
 
-    function raf(time) {
-      lenis.raf(time);
+    function startLenisLoop() {
+      if (window.gsap && window.gsap.ticker) {
+        window.gsap.ticker.add(function (time) {
+          lenis.raf(time * 1000);
+        });
+        window.gsap.ticker.lagSmoothing(0);
+        return;
+      }
+
+      function raf(time) {
+        lenis.raf(time);
+        window.requestAnimationFrame(raf);
+      }
+
       window.requestAnimationFrame(raf);
     }
 
-    window.requestAnimationFrame(raf);
+    startLenisLoop();
     initAnchorScroll();
   }
 
@@ -137,7 +149,17 @@
   }
 
   window.addEventListener("load", function () {
-    initHeroEntrance();
+    if (!window.portfolioCinematicPending) {
+      initHeroEntrance();
+    }
+    initHeroParallax();
+    dispatchScroll();
+    if (window.portfolioRefreshMotion) {
+      window.portfolioRefreshMotion();
+    }
+  });
+
+  window.addEventListener("portfolio:cinematic-ready", function () {
     initHeroParallax();
     dispatchScroll();
     if (window.portfolioRefreshMotion) {

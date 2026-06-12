@@ -45,7 +45,8 @@
       href="https://fonts.googleapis.com/css2?family=Lora:wght@400&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=20260612c" />
+    <link rel="stylesheet" href="./styles.css?v=20260612d" />
+    <link rel="stylesheet" href="./cinematic.css?v=20260612d" />
     <script type="application/ld+json" id="person-jsonld">
       {
         "@context": "https://schema.org",
@@ -99,6 +100,11 @@
     </noscript>
   </head>
   <body>
+    <div id="page-loader" class="page-loader" aria-hidden="false">
+      <p class="page-loader__brand">Yehhi <span>Aleksandra</span></p>
+      <div class="page-loader__bar"><span id="page-loader-fill"></span></div>
+      <p class="page-loader__tag">Royal Pop · scroll cinema</p>
+    </div>
     <div class="scroll-progress" aria-hidden="true"><span></span></div>
     <div class="grain" aria-hidden="true"></div>
     <header class="site-header">
@@ -134,6 +140,10 @@
     </header>
 
     <main id="top">
+      <section class="hero-cinema" id="hero-cinema">
+        <div class="hero-cinema__vignette" id="hero-vignette" aria-hidden="true"></div>
+        <div class="hero-cinema__glow" id="hero-glow" aria-hidden="true"></div>
+        <div class="hero-pin">
       <section class="hero section">
         <div class="hero-copy">
           <p class="eyebrow" data-i18n="heroEyebrow">медиа-автоматизация • B2B-контент • devops</p>
@@ -199,6 +209,27 @@
           <div class="floating-badge badge-python">TG</div>
           <div class="floating-badge badge-docker">AI</div>
           <div class="floating-badge badge-linux">B2B</div>
+          <div class="hero-callout" data-show-from="0.14" data-show-to="0.4" style="--callout-x: 6%; --callout-y: 14%">
+            <span class="hero-callout__tag">PIPELINE</span>
+            <p>AI-картинки → FFmpeg xfade → H.264 scroll-scrub</p>
+          </div>
+          <div class="hero-callout" data-show-from="0.3" data-show-to="0.58" style="--callout-x: 58%; --callout-y: 18%">
+            <span class="hero-callout__tag">STACK</span>
+            <p>GSAP · Lenis · native &lt;video&gt;</p>
+          </div>
+          <div class="hero-callout" data-show-from="0.46" data-show-to="0.78" style="--callout-x: 12%; --callout-y: 62%">
+            <span class="hero-callout__tag">DEPLOY</span>
+            <p>GitHub Pages · vanilla JS · без React</p>
+          </div>
+        </div>
+      </section>
+        </div>
+        <div class="scroll-hint" id="scroll-hint">
+          <span data-i18n="scrollHint">Прокрутка</span>
+          <span class="scroll-hint__line" aria-hidden="true"></span>
+        </div>
+        <div class="film-phase" id="film-phase" aria-live="polite">
+          <span id="film-phase-label">Обзор</span>
         </div>
       </section>
 
@@ -712,8 +743,11 @@
     <script src="./workdb.js"></script>
     <script src="./engage.js"></script>
     <script src="./contact-form.js"></script>
-    <script src="./assets/lenis.min.js?v=20260612c"></script>
-    <script src="./motion.js?v=20260612c"></script>
+    <script src="./assets/gsap.min.js?v=20260612d"></script>
+    <script src="./assets/ScrollTrigger.min.js?v=20260612d"></script>
+    <script src="./assets/lenis.min.js?v=20260612d"></script>
+    <script src="./motion.js?v=20260612d"></script>
+    <script src="./cinematic.js?v=20260612d"></script>
     <script src="./script.js"></script>
   </body>
 </html>

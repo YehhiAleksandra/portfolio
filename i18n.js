@@ -27,6 +27,7 @@
       heroText:
         "Channel grids, bots, pipelines and server deploy. I make processes run every day — with a premium site feel: smooth scroll, cinematic presentation, fast load.",
       heroWork: "See Work",
+      scrollHint: "Scroll",
       heroCv: "Resume / CV",
       heroPdf: "Download PDF",
       metricWorkstations: "channels in the grid",
