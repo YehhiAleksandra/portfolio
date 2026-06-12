@@ -127,7 +127,10 @@
     }
 
     var scrollable = document.documentElement.scrollHeight - window.innerHeight;
-    var scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    var scrollTop =
+      window.portfolioLenis && typeof window.portfolioLenis.scroll === "number"
+        ? window.portfolioLenis.scroll
+        : window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
     var progress = scrollable > 0 ? clamp(scrollTop / scrollable, 0, 1) : 0;
 
     progressBar.style.width = progress * 100 + "%";
@@ -236,15 +239,14 @@
     });
   }
 
-  window.addEventListener(
-    "scroll",
-    function () {
-      requestPipelineUpdate();
-      updateScrollUI();
-      updateRevealItems();
-    },
-    { passive: true }
-  );
+  function onScrollTick() {
+    requestPipelineUpdate();
+    updateScrollUI();
+    updateRevealItems();
+  }
+
+  window.addEventListener("scroll", onScrollTick, { passive: true });
+  window.addEventListener("portfolio:scroll", onScrollTick);
 
   window.addEventListener("resize", function () {
     requestPipelineUpdate();

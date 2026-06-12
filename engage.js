@@ -170,20 +170,20 @@
       .catch(function () {
         var fallback = [
           {
-            tag: "portfolio",
-            title: currentLocale === "en" ? "Scroll landing showcase" : "Витрина scroll-лендингов",
+            tag: "motion",
+            title: currentLocale === "en" ? "Cinematic UX polish" : "Киношный UX",
             body:
               currentLocale === "en"
-                ? "AXIS NODE and NEXUS CORE repos linked; Work DB filled with live cases."
-                : "Кейсы AXIS NODE и NEXUS CORE на GitHub; рабочая БД с живыми проектами.",
+                ? "Lenis smooth scroll, film grain, gradient progress bar and hero entrance animations."
+                : "Lenis, film grain, градиентный прогресс-бар и анимация входа в hero.",
           },
           {
-            tag: "deploy",
-            title: currentLocale === "en" ? "New GitHub repos" : "Новые репозитории",
+            tag: "site",
+            title: currentLocale === "en" ? "Portfolio refresh" : "Обновление портфолио",
             body:
               currentLocale === "en"
-                ? "axis-node-website and nexus-core-website published under YehhiAleksandra."
-                : "axis-node-website и nexus-core-website в профиле GitHub.",
+                ? "Header compacts on scroll, section reveals with Royal Pop easing."
+                : "Компактный header при скролле, reveal-секции с Royal Pop easing.",
           },
         ];
         changelog.innerHTML = fallback

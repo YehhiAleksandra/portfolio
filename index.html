@@ -89,7 +89,9 @@
     </script>
     <noscript>
       <style>
-        .reveal {
+        .reveal,
+        .hero-copy > *,
+        .hero .terminal-scene {
           opacity: 1;
           transform: none;
         }
@@ -117,7 +119,6 @@
       <div class="site-menu" id="site-menu">
         <nav class="nav" aria-label="Основная навигация" data-i18n-aria="navAria">
           <a href="#why-me" data-i18n="navWhy">Почему я</a>
-          <a href="#showcase" data-i18n="navShowcase">Кейсы</a>
           <a href="#things" data-i18n="navThings">Что делаю</a>
           <a href="#process" data-i18n="navProcess">Подход</a>
           <a href="#services" data-i18n="navServices">Услуги</a>
@@ -133,12 +134,12 @@
     </header>
 
     <main id="top">
-      <section class="hero section reveal">
+      <section class="hero section">
         <div class="hero-copy">
-          <p class="eyebrow" data-i18n="heroEyebrow">медиа-автоматизация • B2B-контент • scroll-лендинги</p>
-          <h1 data-i18n="heroTitle">Контент, автоматизация и премиальные product-страницы — без ручной рутины.</h1>
+          <p class="eyebrow" data-i18n="heroEyebrow">медиа-автоматизация • B2B-контент • devops</p>
+          <h1 data-i18n="heroTitle">Автоматизация контента и инфраструктуры — без ручной рутины.</h1>
           <p data-i18n="heroText">
-            Сетка каналов и автопубликация — плюс киношные scroll-лендинги: AI-картинки → видео → разборка продукта по скроллу. От идеи до деплоя на GitHub Pages.
+            Сетка каналов, боты, пайплайны и деплой на сервер. Делаю так, чтобы процесс работал каждый день — а сайт ощущался премиально: плавный скролл, киношная подача, быстрая загрузка.
           </p>
           <ul class="hero-metrics" aria-label="Ключевые цифры" data-i18n-aria="metricsAria">
             <li>
@@ -150,12 +151,12 @@
               <span data-i18n="metricRegistry">постов в месяц по плану</span>
             </li>
             <li>
-              <strong>2</strong>
-              <span data-i18n="metricDevops">scroll-лендинга в портфолио</span>
+              <strong>120+</strong>
+              <span data-i18n="metricDevops">рабочих станций в админке</span>
             </li>
             <li>
-              <strong>AI</strong>
-              <span data-i18n="metricDeploy">картинки → видео → сайт</span>
+              <strong>24/7</strong>
+              <span data-i18n="metricDeploy">сервисы на systemd</span>
             </li>
           </ul>
           <div class="hero-actions">
@@ -243,36 +244,6 @@
             <span>Scroll reveal</span>
             <span>FFmpeg</span>
           </div>
-        </div>
-      </section>
-
-      <section class="section showcase reveal" id="showcase" aria-labelledby="showcase-title">
-        <div class="section-heading">
-          <p class="section-kicker" data-i18n="showcaseKicker">Кейсы</p>
-          <h2 id="showcase-title" data-i18n="showcaseTitle">Scroll-лендинги в стиле Royal Pop — киношная разборка по скроллу.</h2>
-          <p data-i18n="showcaseText">
-            API генерирует картинки → пайплайн собирает видео → сайт скрабит MP4 нативным плеером. Без тяжёлого React, быстро на GitHub Pages.
-          </p>
-        </div>
-        <div class="showcase-grid">
-          <article class="showcase-card">
-            <p class="showcase-tag">Edge AI · Video scrub</p>
-            <h3>AXIS NODE</h3>
-            <p data-i18n="showcaseAxisText">Киношная разборка hardware-узла: circle-wipe, callouts, stats, нативный H.264 scroll-scrub.</p>
-            <div class="showcase-stack">
-              <span>GSAP</span><span>Lenis</span><span>FFmpeg</span><span>Python</span>
-            </div>
-            <a href="https://github.com/YehhiAleksandra/axis-node-website" target="_blank" rel="noreferrer" data-i18n="showcaseAxisLink">Код на GitHub →</a>
-          </article>
-          <article class="showcase-card">
-            <p class="showcase-tag">Procedural · Canvas</p>
-            <h3>NEXUS CORE</h3>
-            <p data-i18n="showcaseNexusText">Scroll-driven explode на Canvas 2D — без видео, 192 кадра синтезируются на лету.</p>
-            <div class="showcase-stack">
-              <span>Canvas</span><span>GSAP</span><span>Lenis</span>
-            </div>
-            <a href="https://github.com/YehhiAleksandra/nexus-core-website" target="_blank" rel="noreferrer" data-i18n="showcaseNexusLink">Код на GitHub →</a>
-          </article>
         </div>
       </section>
 
@@ -741,6 +712,8 @@
     <script src="./workdb.js"></script>
     <script src="./engage.js"></script>
     <script src="./contact-form.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="./motion.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>
