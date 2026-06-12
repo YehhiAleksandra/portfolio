@@ -131,6 +131,9 @@
     var progress = scrollable > 0 ? clamp(scrollTop / scrollable, 0, 1) : 0;
 
     progressBar.style.width = progress * 100 + "%";
+    if (siteHeader) {
+      siteHeader.classList.toggle("is-scrolled", scrollTop > 24);
+    }
     if (scrollTop > window.innerHeight * 0.8) {
       backToTop.classList.add("is-visible");
     } else {

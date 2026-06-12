@@ -154,10 +154,23 @@ a:focus-visible {
   max-width: none;
   margin: 0;
   padding: calc(12px + env(safe-area-inset-top, 0px)) var(--page-gutter) 10px;
-  -webkit-backdrop-filter: blur(18px);
-  backdrop-filter: blur(18px);
-  background: hsl(60 33% 97% / 0.82);
-  border-bottom: 1px solid var(--border);
+  -webkit-backdrop-filter: blur(16px) saturate(1.05);
+  backdrop-filter: blur(16px) saturate(1.05);
+  background: hsl(60 33% 97% / 0.72);
+  border-bottom: 1px solid transparent;
+  transition:
+    background 280ms ease,
+    border-color 280ms ease,
+    box-shadow 280ms ease,
+    backdrop-filter 280ms ease;
+}
+
+.site-header.is-scrolled {
+  -webkit-backdrop-filter: blur(22px) saturate(1.25);
+  backdrop-filter: blur(22px) saturate(1.25);
+  background: hsl(60 33% 97% / 0.88);
+  border-bottom-color: var(--border);
+  box-shadow: 0 16px 44px -24px hsl(0 0% 0% / 0.22);
 }
 
 .site-header__bar,
@@ -168,7 +181,12 @@ a:focus-visible {
 }
 
 .dark .site-header {
-  background: hsl(60 3% 10% / 0.82);
+  background: hsl(60 3% 10% / 0.72);
+}
+
+.dark .site-header.is-scrolled {
+  background: hsl(60 3% 10% / 0.9);
+  box-shadow: 0 16px 44px -24px hsl(0 0% 0% / 0.5);
 }
 
 .site-header::after {
@@ -2482,19 +2500,22 @@ main {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  html {
     scroll-behavior: auto !important;
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.001ms !important;
   }
 
   .reveal {
     opacity: 1;
     transform: none;
+    transition: none !important;
   }
+}
+
+/* Marquee always runs — decorative ticker, not scroll motion */
+.marquee-track {
+  animation: marquee 34s linear infinite !important;
+  animation-duration: 34s !important;
+  animation-iteration-count: infinite !important;
 }
 
 @media (max-width: 980px) {
