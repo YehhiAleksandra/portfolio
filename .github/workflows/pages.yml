@@ -1,0 +1,58 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify GitHub Pages is enabled
+        uses: actions/github-script@v7
+        with:
+          script: |
+            try {
+              await github.rest.repos.getPages({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+              });
+            } catch (error) {
+              if (error.status !== 404) throw error;
+              const url = `https://github.com/${context.repo.owner}/${context.repo.repo}/settings/pages`;
+              core.setFailed([
+                'GitHub Pages is not enabled for this repository (API 404).',
+                '',
+                'One-time fix (must be done by a repo admin in the browser):',
+                `1. Open ${url}`,
+                '2. Build and deployment ? Source ? GitHub Actions',
+                '3. Save, then re-run this workflow',
+                '',
+                'This happens after making the repo private and public again ? Pages must be re-enabled manually.',
+              ].join('\n'));
+            }
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+          include-hidden-files: true
+
+      - id: deployment
+        uses: actions/deploy-pages@v4
