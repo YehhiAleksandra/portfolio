@@ -30,15 +30,15 @@
       heroCv: "Resume / CV",
       heroPdf: "Download PDF",
       metricWorkstations: "channels in the grid",
-      metricRegistry: "registry records in one project",
-      metricDevops: "hours DevOps Engineer training",
+      metricRegistry: "planned posts per month",
+      metricDevops: "content pipelines",
       metricDeploy: "TEXT+IMAGE and VIDEO",
       terminalAria: "Animated terminal",
       altHero: "Illustration of yehhi Aleksandra with a Python laptop",
       techMarquee: "Technologies",
       statementKicker: "Short Version",
       statementTitle:
-        "I maintain 120+ workstations, write Python automation and run services on Ubuntu. I like tasks where code also needs to live calmly on a server.",
+        "I work on B2B media automation and a channel grid. I like tasks where content also has to publish every day without manual control.",
       whyKicker: "Why Work With Me",
       whyTitle: "Not just writing code, but delivering a running service.",
       whyIntro:
@@ -101,6 +101,9 @@
       note3Date: "June 2026",
       faqKicker: "FAQ",
       faqTitle: "Common questions before we start.",
+      faqQ0: "What are the real numbers — not a slogan?",
+      faqA0:
+        "5+ channels in one grid, 30+ planned posts per month, two separate pipelines: TEXT+IMAGE and VIDEO. Based in Minsk, UTC+3. Observable practice, not a KPI wall.",
       faqQ1: "How long does a typical project take?",
       faqA1:
         "Scoping — 1 day, working bot or automation MVP — from one week, full service with deploy — from one month. Exact estimate after a short brief on Telegram or email.",
@@ -245,6 +248,7 @@
       contactText:
         "Message me on Telegram or email: what exists now, what should happen and where the pain is. I will quickly understand the context and suggest the shortest path to a working result.",
       contactTelegram: "Email me",
+      contactPortfolio: "Portfolio",
       contactBotHint: "Or use the portfolio visitor bot: menu, services and /task requests.",
       contactVisitorLink: "Open bot",
       formName: "Name",
@@ -285,15 +289,15 @@
       footerCopy: "© 2026 Yehhi Aleksandra",
       modalClose: "Close",
       modalCloseAria: "Close",
-      pageTitle: "Yehhi Aleksandra | media automation & B2B content",
+      pageTitle: "Yehhi Aleksandra | media automation, B2B",
       pageDescription:
-        "Media automation and B2B content from Minsk: channel grid, scheduled publishing, Telegram. Send a brief — we'll scope and ship.",
-      ogTitle: "Yehhi Aleksandra | media automation & B2B",
+        "Yehhi Aleksandra, Minsk: B2B media automation. 5+ channels, 30+ planned posts per month, TEXT+IMAGE and VIDEO pipelines, Telegram auto-publish.",
+      ogTitle: "Yehhi Aleksandra | media automation",
       ogDescription:
-        "Media automation and B2B content from Minsk. Channel grid, auto-publishing and Telegram — without manual busywork.",
+        "Python developer, DevOps engineer and system administrator from Minsk. Bots, automation, servers and monitoring.",
       jsonLdName: "Yehhi Aleksandra",
       jsonLdDescription:
-        "Media automation and B2B content. Channel grid, scheduled publishing, Telegram.",
+        "Media automation and B2B content from Minsk. 5+ channels, 30+ posts per month, TEXT+IMAGE and VIDEO pipelines.",
       serviceBotMailSubject: "Telegram bot",
       serviceAutomationMailSubject: "Python automation",
       serviceDeployMailSubject: "Deploy and servers",
@@ -536,16 +540,6 @@
   }
 
   collectRussianDefaults();
-
-  dictionary.ru.pageTitle = "Yehhi Aleksandra | медиа-автоматизация и B2B-контент";
-  dictionary.ru.pageDescription =
-    "Медиа-автоматизация и B2B-контент из Минска: сетка каналов, автопубликация, Telegram. Напишите задачу — разберём и запустим.";
-  dictionary.ru.ogTitle = "Yehhi Aleksandra | медиа-автоматизация и B2B";
-  dictionary.ru.ogDescription =
-    "Медиа-автоматизация и B2B-контент из Минска. Сетка каналов, автопубликация и Telegram — без ручной рутины.";
-  dictionary.ru.jsonLdName = "Yehhi Aleksandra";
-  dictionary.ru.jsonLdDescription =
-    "Медиа-автоматизация и B2B-контент. Сетка каналов, автопубликация, Telegram.";
 
   Array.prototype.forEach.call(switches, function (button) {
     button.addEventListener("click", function () {
