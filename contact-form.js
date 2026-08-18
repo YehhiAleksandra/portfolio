@@ -68,10 +68,17 @@
   }
 
   function payloadFromForm() {
+    var utm = typeof window.siteUtm === "function" ? window.siteUtm() : {};
+    var utmLine = Object.keys(utm)
+      .map(function (key) {
+        return key + "=" + utm[key];
+      })
+      .join(" ");
+    var body = form.querySelector('[name="message"]').value.trim();
     return {
       name: form.querySelector('[name="name"]').value.trim(),
       contact: form.querySelector('[name="contact"]').value.trim(),
-      message: form.querySelector('[name="message"]').value.trim(),
+      message: utmLine ? body + "\n\nисточник: " + utmLine : body,
       website: form.querySelector('[name="website"]').value.trim(),
     };
   }

@@ -1,4 +1,45 @@
 (function () {
+  var UTM_KEY = "aleks.utm.v1";
+  var UTM_KEYS = [
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_content",
+    "utm_term",
+    "yclid",
+    "ysclid",
+    "gclid",
+  ];
+
+  function captureUtm() {
+    var params = new URLSearchParams(window.location.search);
+    var found = {};
+    var any = false;
+    UTM_KEYS.forEach(function (key) {
+      var value = params.get(key);
+      if (value) {
+        found[key] = value;
+        any = true;
+      }
+    });
+    if (any) {
+      try {
+        sessionStorage.setItem(UTM_KEY, JSON.stringify(found));
+      } catch (error) {}
+    }
+  }
+
+  function readUtm() {
+    try {
+      return JSON.parse(sessionStorage.getItem(UTM_KEY) || "{}");
+    } catch (error) {
+      return {};
+    }
+  }
+
+  window.siteUtm = readUtm;
+  captureUtm();
+
   function absoluteUrl(base, path) {
     if (!path) {
       return base;

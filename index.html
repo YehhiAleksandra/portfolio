@@ -31,7 +31,14 @@
     <meta name="twitter:title" content="Yehhi Aleksandra | медиа-автоматизация" />
     <meta name="twitter:description" content="Минск: 5+ каналов, 30+ постов в месяц, TEXT+IMAGE и VIDEO. Автопубликация в Telegram." />
     <meta name="twitter:image" content="https://yehhialeksandra.github.io/portfolio/assets/og-preview.png" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1" />
+    <meta name="author" content="Yehhi Aleksandra" />
+    <meta name="geo.region" content="BY-MI" />
+    <meta name="geo.placename" content="Minsk" />
+    <meta name="keywords" content="медиа-автоматизация, B2B контент, сетка каналов, Telegram автопубликация, Минск, Yehhi Aleksandra" />
     <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="./assets/favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" sizes="180x180" />
     <link
       rel="preload"
       href="./assets/hero-character.webp"
@@ -42,10 +49,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Lora:wght@400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,600;7..72,700&family=Onest:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./styles.css?v=reveal-fix-3" />
+    <link rel="stylesheet" href="./styles.css?v=prod-20260818" />
     <script type="application/ld+json" id="person-jsonld">
       {
         "@context": "https://schema.org",
@@ -99,6 +106,20 @@
             }
           }
         ]
+      }
+    </script>
+    <script type="application/ld+json" id="service-jsonld">
+      {
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        "name": "Yehhi Aleksandra — медиа-автоматизация",
+        "url": "https://yehhialeksandra.github.io/portfolio/",
+        "image": "https://yehhialeksandra.github.io/portfolio/assets/og-preview.png",
+        "email": "yehhialeksandra@gmail.com",
+        "areaServed": { "@type": "City", "name": "Minsk" },
+        "availableLanguage": ["ru", "en"],
+        "serviceType": ["Media automation", "B2B content", "Telegram publishing"],
+        "founder": { "@type": "Person", "name": "Yehhi Aleksandra" }
       }
     </script>
     <script>
@@ -702,6 +723,7 @@
             <textarea name="message" rows="5" required minlength="10" maxlength="2000" data-i18n-placeholder="formMessagePh" placeholder="Что есть сейчас, что должно получиться, где больше всего рутины"></textarea>
           </label>
           <button type="submit" class="button" data-i18n="formSubmit">Отправить заявку</button>
+          <p class="form-legal" data-i18n="formLegal">Отправляя форму, вы соглашаетесь, что имя и контакт нужны только для ответа на задачу. Рассылок нет.</p>
           <p class="contact-form-status" id="contact-form-status" role="status" aria-live="polite"></p>
         </form>
         <a class="telegram-cta" id="owner-telegram-link" href="mailto:yehhialeksandra@gmail.com?subject=Задача с сайта" target="_blank" rel="noreferrer">

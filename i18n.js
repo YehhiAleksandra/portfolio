@@ -258,6 +258,7 @@
       formMessage: "Task",
       formMessagePh: "What exists now, desired outcome, where the routine hurts most",
       formSubmit: "Send request",
+      formLegal: "By sending the form you agree we use your name and contact only to reply. No newsletters.",
       cvBack: "← Back to site",
       cvDownload: "Download PDF",
       cvProfile: "Profile",

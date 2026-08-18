@@ -3,4 +3,9 @@ Allow: /
 
 Disallow: /status.html
 
+User-agent: Yandex
+Allow: /
+Disallow: /status.html
+Clean-param: utm_source&utm_medium&utm_campaign&utm_content&utm_term&yclid&ysclid&gclid
+
 Sitemap: https://yehhialeksandra.github.io/portfolio/sitemap.xml
