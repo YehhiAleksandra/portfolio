@@ -1,4 +1,6 @@
 User-agent: *
 Allow: /
 
+Disallow: /status.html
+
 Sitemap: https://yehhialeksandra.github.io/portfolio/sitemap.xml
