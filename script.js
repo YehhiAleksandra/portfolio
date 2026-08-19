@@ -49,10 +49,10 @@
     themeToggle.textContent = isDark
       ? locale === "en"
         ? "Light"
-        : "Светлая"
+        : "Свет"
       : locale === "en"
         ? "Dark"
-        : "Темная";
+        : "Тёмн";
     themeToggle.setAttribute("aria-pressed", String(isDark));
     themeColor.setAttribute("content", isDark ? "#171715" : "#f7f7ef");
   }

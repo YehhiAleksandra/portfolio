@@ -70,6 +70,7 @@ html {
   overflow-x: clip;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  scroll-padding-top: calc(76px + env(safe-area-inset-top, 0px));
 }
 
 body {
@@ -2037,6 +2038,7 @@ main {
   max-width: var(--heading-max);
   margin-inline: auto;
   text-align: center;
+  scroll-margin-top: calc(80px + env(safe-area-inset-top, 0px));
 }
 
 .contact h2 {
@@ -2676,8 +2678,21 @@ main {
   .brand {
     font-size: clamp(17px, 4.8vw, 22px);
     min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    overflow: visible;
+    text-overflow: unset;
+  }
+
+  .brand-full {
+    display: none;
+  }
+
+  .contact-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 16px;
   }
 
   .availability {
