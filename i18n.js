@@ -84,7 +84,7 @@
       notesKicker: "Notes",
       notesTitle: "Short posts on tasks, deploy and bots.",
       notesIntro:
-        "I post on Telegram: what I build, what broke on the server and what worked. Subscribe — you can also ask about automation there.",
+        "I write short notes on what I build, what broke on the server and what worked. Leave a request if you need the same automation.",
       note1Tag: "Bot",
       note1Title: "Expense Tracker: idea to LXC",
       note1Text: "How I built the four-envelope bot, Notion API, SQLite and systemd on Ubuntu LXC — and why clients care.",
@@ -106,7 +106,7 @@
         "5+ channels in one grid, 30+ planned posts per month, two separate pipelines: TEXT+IMAGE and VIDEO. Based in Minsk, UTC+3. Observable practice, not a KPI wall.",
       faqQ1: "How long does a typical project take?",
       faqA1:
-        "Scoping — 1 day, working bot or automation MVP — from one week, full service with deploy — from one month. Exact estimate after a short brief on Telegram or email.",
+        "Scoping — 1 day, working bot or automation MVP — from one week, full service with deploy — from one month. Exact estimate after a short brief via the request form or email.",
       faqQ2: "Payment and engagement model?",
       faqA2:
         "In stages: brief → estimate → MVP → polish → support. Payment by agreement (milestone / fixed MVP). Small tasks can start with an audit and plan.",
@@ -246,10 +246,10 @@
       contactKicker: "Minsk • remote • freelance / long-term",
       contactTitle: "Have a task that should be automated?",
       contactText:
-        "Message me on Telegram or email: what exists now, what should happen and where the pain is. I will quickly understand the context and suggest the shortest path to a working result.",
+        "Leave a request in the form below or email: what exists now, what should happen and where the pain is. I will quickly understand the context and suggest the shortest path to a working result.",
       contactTelegram: "Email me",
       contactPortfolio: "Portfolio",
-      contactBotHint: "Or use the portfolio visitor bot: menu, services and /task requests.",
+      contactBotHint: "Inbound only through the request form or email.",
       contactVisitorLink: "Open bot",
       formName: "Name",
       formNamePh: "How should I address you",
