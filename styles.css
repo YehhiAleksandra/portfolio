@@ -2058,6 +2058,7 @@ main {
 }
 
 .contact-form {
+  position: relative;
   max-width: 720px;
   margin: var(--space-md) auto 0;
   padding: var(--space-sm);
@@ -2129,11 +2130,19 @@ main {
 }
 
 .hp-field {
-  position: absolute;
-  left: -9999px;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
+  position: absolute !important;
+  left: 0 !important;
+  top: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  clip-path: inset(50%) !important;
+  border: 0 !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 .contact-bot-hint {
