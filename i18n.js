@@ -121,7 +121,7 @@
         "I can stay for support: monitoring, small changes, backups. Or hand over docs so your team takes over.",
       faqQ6: "What do you not do?",
       faqA6:
-        "Pure design sites, heavy front-end “turnkey”, greenfield 1C dev, shady growth hacks. Focus: Python, bots, automation, Linux, DevOps.",
+        "Pure design sites, heavy front-end “turnkey”. Focus: Python, bots, automation, Linux, DevOps.",
       faqPricing:
         "Ballpark: a simple Telegram bot starts as a small MVP; automation + deploy is scoped after the brief. Exact numbers after scope is clear.",
       thingsKicker: "What I Do",
