@@ -68,18 +68,18 @@
       reviewsIntro:
         "Short feedback from typical engagements — internal automation, bots and infrastructure. Names shortened on request.",
       review1Text:
-        "\u201CWe needed more than a script \u2014 the service had to survive reboot. Aleksandra figured it out herself, set up systemd and left clear logs.\u201D",
+        "“We needed more than a script — the service had to survive reboot. Aleksandra figured it out herself, set up systemd and left clear logs.”",
       review1Author: "IT department, internal automation",
       review2Text:
-        "\u201CTelegram bot with inline menu and alerts \u2014 no endless calls. We got a working MVP fast, then tuned it to our process.\u201D",
+        "“Telegram bot with inline menu and alerts — no endless calls. We got a working MVP fast, then tuned it to our process.”",
       review2Author: "Client, tracking and notifications",
       review3Text:
-        "\u201CGreat that she understands both code and Linux \u2014 no separate deploy contractor. Deploy, backup and monitoring in one cycle.\u201D",
+        "“Great that she understands both code and Linux — no separate deploy contractor. Deploy, backup and monitoring in one cycle.”",
       review3Author: "Client, B2B content",
       demoBannerKicker: "Try in Telegram",
-      demoBannerTitle: "Live expense bot \u2014 not a mockup",
+      demoBannerTitle: "Live expense bot — not a mockup",
       demoBannerText:
-        "\u2014",
+        "—",
       demoBannerCta: "Open demo bot",
       notesKicker: "Notes",
       notesTitle: "Short posts on tasks, deploy and bots.",
@@ -87,10 +87,10 @@
         "I write short notes on what I build, what broke on the server and what worked. Leave a request if you need the same automation.",
       note1Tag: "Bot",
       note1Title: "Expense Tracker: idea to LXC",
-      note1Text: "How I built the four-envelope bot, Notion API, SQLite and systemd on Ubuntu LXC \u2014 and why clients care.",
+      note1Text: "How I built the four-envelope bot, Notion API, SQLite and systemd on Ubuntu LXC — and why clients care.",
       note2Tag: "DevOps",
       note2Title: "228 hours DevOps: what actually helped",
-      note2Text: "Docker, Ansible, Prometheus and CI/CD \u2014 for the portfolio and a home server with DuckDNS.",
+      note2Text: "Docker, Ansible, Prometheus and CI/CD — for the portfolio and a home server with DuckDNS.",
       note3Tag: "Portfolio",
       note3Title: "Site + Work DB + bots",
       note3Text: "Why a live portfolio on FastAPI, SQLite and two Telegram bots instead of a one-off PDF.",
@@ -101,15 +101,15 @@
       note3Date: "June 2026",
       faqKicker: "FAQ",
       faqTitle: "Common questions before we start.",
-      faqQ0: "What are the real numbers \u2014 not a slogan?",
+      faqQ0: "What are the real numbers — not a slogan?",
       faqA0:
         "5+ channels in one grid, 30+ planned posts per month, two separate pipelines: TEXT+IMAGE and VIDEO. Based in Minsk, UTC+3. Observable practice, not a KPI wall.",
       faqQ1: "How long does a typical project take?",
       faqA1:
-        "Scoping \u2014 1 day, working bot or automation MVP \u2014 from one week, full service with deploy \u2014 from one month. Exact estimate after a short brief via the request form or email.",
+        "Scoping — 1 day, working bot or automation MVP — from one week, full service with deploy — from one month. Exact estimate after a short brief via the request form or email.",
       faqQ2: "Payment and engagement model?",
       faqA2:
-        "In stages: brief \u2192 estimate \u2192 MVP \u2192 polish \u2192 support. Payment by agreement (milestone / fixed MVP). Small tasks can start with an audit and plan.",
+        "In stages: brief → estimate → MVP → polish → support. Payment by agreement (milestone / fixed MVP). Small tasks can start with an audit and plan.",
       faqQ3: "Remote work? Time zone?",
       faqA3:
         "Yes, remote. Based in Minsk (UTC+3), fine with EU and CIS teams. Calls when needed, not for show.",
@@ -121,21 +121,39 @@
         "I can stay for support: monitoring, small changes, backups. Or hand over docs so your team takes over.",
       faqQ6: "What do you not do?",
       faqA6:
-        "Pure design sites, heavy front-end \u201Cturnkey\u201D. Focus: media automation.",
+        "Pure design sites, heavy front-end “turnkey”, greenfield 1C dev, shady growth hacks. Focus: Python, bots, automation, Linux, DevOps.",
       faqPricing:
         "Ballpark: a simple Telegram bot starts as a small MVP; automation + deploy is scoped after the brief. Exact numbers after scope is clear.",
       thingsKicker: "What I Do",
       thingsTitle: "Not just code, but the full path from task to service.",
-      thingProcessKicker: "How I Work",
-      thingProcessTitle: "One simple approach for a bot, a server or an automation task.",
-      thingProcessAsk: "Understand",
-      thingProcessAskText: "Why the task matters, where the pain is and what a done result looks like.",
-      thingProcessBuild: "Build",
-      thingProcessBuildText: "A working prototype fast: code, scenario, bot, integration \u2014 something you can try.",
-      thingProcessDeploy: "Deploy",
-      thingProcessDeployText: "Package the service, configure systemd or containers, check logs, access and recovery.",
-      thingProcessObserve: "Observe",
-      thingProcessObserveText: "Add notifications, metrics and control points so the service does not run on luck.",
+      thingBotTitle: "Telegram bots",
+      thingBotText: "Inline menus, background checks, notifications, API integrations and clear user flows.",
+      thingAutomationTitle: "Automation",
+      thingAutomationText: "Python scripts for routine operations, parsing, reports, sync and internal workflows.",
+      thingDeployTitle: "Servers and deploy",
+      thingDeployText: "Ubuntu, systemd, LXC, Docker, Podman, WireGuard and predictable service operation.",
+      thingMonitoringTitle: "Monitoring",
+      thingMonitoringText: "Uptime checks, disks, processes, Telegram alerts, Prometheus and Grafana.",
+      stackKicker: "Stack In Action",
+      stackTitle: "Not just technologies, but a clear role in the result.",
+      stackPythonText: "Scripts, bots, parsing, API integrations and routine automation.",
+      stackSystemdText: "The service starts after reboot and does not run on luck alone.",
+      stackSqliteText: "A lightweight DB for MVPs, admin panels, work history and local tools.",
+      stackGrafanaText: "Metrics, dashboards and a clear picture of what happens with the service.",
+      pipelineKicker: "Skills as Pipeline",
+      pipelineTitle: "Every wagon carries part of the result.",
+      skillsAria: "Skills chain",
+      altTrain: "Illustration of yehhi Aleksandra next to a technology train",
+      processKicker: "How I Work",
+      processTitle: "One simple approach for a bot, server or automation.",
+      processUnderstand: "Understand",
+      processUnderstandText: "Clarify why the task matters, where the pain is and what done should mean.",
+      processBuild: "Build",
+      processBuildText: "Quickly assemble a working prototype: code, flow, integrations, data and first launch.",
+      processDeploy: "Deploy",
+      processDeployText: "Package the service, configure systemd or containers, check logs, access and recovery.",
+      processObserve: "Observe",
+      processObserveText: "Add notifications, metrics and control points so the service does not run on luck.",
       servicesKicker: "Services",
       servicesTitle: "When you need a working tool, not a presentation.",
       serviceBotTitle: "Telegram bot for a task",
@@ -150,114 +168,251 @@
       serviceMonitoringTitle: "Monitoring and alerts",
       serviceMonitoringText: "Website checks, disks, processes, Telegram notifications, Prometheus and Grafana.",
       serviceMonitoringLink: "Set up control",
+      clientKicker: "For Clients",
+      clientTitle: "What you can get in a day, a week and a month.",
+      clientDay: "1 day",
+      clientDayTitle: "Understand the task",
+      clientDayText: "Map the process, find manual routine, suggest a short plan and estimate an MVP.",
+      clientWeek: "1 week",
+      clientWeekTitle: "Build a working prototype",
+      clientWeekText: "A bot, script, API integration or monitoring flow that can already be tested.",
+      clientMonth: "1 month",
+      clientMonthTitle: "Turn it into a service",
+      clientMonthText: "Deploy, database, logs, backup, documentation and clear support after launch.",
       workDbKicker: "Work DB",
-      workDbTitle: "Orders, projects and progress \u2014 not in my head, in SQLite.",
-      workDbLoading: "Loading records from DB...",
-      valueKicker: "Value",
-      valueTitle: "Calculate the benefit and submit a request in one place.",
-      valueStatusTitle: "Live status",
-      valueStatusText: "Checking API and DB...",
-      valueStatusLink: "Open status page",
-      valueCalcTitle: "Routine calculator",
-      valueCalcLabel: "Hours of routine per week",
-      valueCalcResult: "\u2248 20 hours per month can be reclaimed by automation.",
-      taskKicker: "$ automate --task",
-      taskLabel: "Describe your task in one or two lines:",
-      taskInputPh: "Telegram bot with requests and status notifications...",
+      workDbTitle: "Orders, projects and progress — not in my head, but in SQLite.",
+      workDbText:
+        "This section pulls data from a local FastAPI + SQLite backend. For a client it looks like a public work board, for me it is a mini admin panel with real CRUD.",
+      filterAll: "All",
+      filterProgress: "In progress",
+      filterDone: "Done",
+      filterSupport: "On support",
+      workDbAdmin: "Open local admin",
+      workDbOps: "Ops: bots and services",
+      workDbPassword: "The local MVP password is configured on the backend.",
+      loadingWorkDb: "Loading records from the database...",
+      loadingChangelog: "Loading recent updates...",
+      loadingStatus: "Checking API and database...",
+      changelogTitle: "What's new on the site",
+      changelogIntro: "A short history of what was added to the portfolio, backend and deploy setup.",
+      automationKicker: "Interactive",
+      automationTitle: "Let's estimate value and prepare a request.",
+      statusTitle: "Live status",
+      calculatorTitle: "Routine calculator",
+      calculatorLabel: "Hours of routine per week",
+      routineUnit: "h/week",
+      routineResult: "≈ 20 hours per month can be returned with automation.",
+      taskTitle: "$ automate --task",
+      taskPlaceholder: "Example: I need a bot that checks websites and writes to Telegram",
       taskButton: "Send task by email",
-      notesKicker: "Notes",
-      notesTitle: "Short posts on tasks, deploy and bots.",
-      notesIntro:
-        "I write short notes on what I build, what broke on the server and what worked. Leave a request if you need the same automation.",
-      note1Tag: "Bot",
-      note1Title: "Expense Tracker: idea to LXC",
-      note1Text: "How I built the four-envelope bot, Notion API, SQLite and systemd on Ubuntu LXC \u2014 and why clients care.",
-      note2Tag: "DevOps",
-      note2Title: "228 hours DevOps: what actually helped",
-      note2Text: "Docker, Ansible, Prometheus and CI/CD \u2014 for the portfolio and a home server with DuckDNS.",
-      note3Tag: "Portfolio",
-      note3Title: "Site + Work DB + bots",
-      note3Text: "Why a live portfolio on FastAPI, SQLite and two Telegram bots instead of a one-off PDF.",
-      notesChannel: "Email me",
-      notesVisitorBot: "Portfolio visitor bot",
-      note1Date: "May 2026",
-      note2Date: "January 2026",
-      note3Date: "June 2026",
+      projectsKicker: "Projects",
+      projectsTitle: "Projects coming soon.",
+      statusOpen: "Open status page",
+      workspaceCaption:
+        "Automation for me is not only writing code. It is connecting APIs, deploying the service, checking logs and making sure it will still run tomorrow.",
+      altWorkspace: "Workspace illustration with Python, Telegram bot, Docker and server",
+      openGithub: "Open GitHub",
+      viewProfile: "View profile",
+      caseTaskLabel: "Task",
+      caseSolutionLabel: "Solution",
+      caseResultLabel: "Result",
+      projectStopTask:
+        "Automatically check Telegram subscriptions against a large registry of prohibited materials.",
+      projectStopSolution:
+        "DOC/DOCX parsing, Flask registration, background worker, SQLite and an inline bot on Ubuntu.",
+      projectStopResult:
+        "4000+ records, checks every 10 minutes, service under systemd after reboot.",
+      projectExpenseTask:
+        "Track expenses quickly with the four-envelope method and keep data across devices.",
+      projectExpenseSolution:
+        "Telegram bot with setup wizard, SQLite, Notion sync, inline menus and deploy in Ubuntu LXC.",
+      projectExpenseResult:
+        "—",
+      expenseBubbleSetup: "Salary, loans, deposit, utilities?",
+      expenseBubbleAdd: "Add expense: 42 BYN",
+      projectAlertTask:
+        "Get alerted when a site goes down, disk fills up or an important process stops.",
+      projectAlertSolution:
+        "Modular checks, plugin API, Telegram notifications and a systemd service on Linux.",
+      projectAlertResult:
+        "Basic alerts already in production; architecture ready for more checks and a dashboard.",
+      experienceKicker: "Experience",
+      experienceTitle: "In real infrastructure, details matter.",
+      experienceJob: "VIA Vayar — IT department programmer",
+      experienceItem1: "Administration of 120+ Windows and Linux workstations.",
+      experienceItem2: "Python scripts for internal task automation.",
+      experienceItem3: "Networks: TCP/IP, DNS, OSPF, ISDN, Ethernet.",
+      experienceItem4: "Ubuntu servers, systemd and service maintenance.",
+      contactKicker: "Minsk • remote • freelance / long-term",
+      contactTitle: "Have a task that should be automated?",
+      contactText:
+        "Leave a request in the form below or email: what exists now, what should happen and where the pain is. I will quickly understand the context and suggest the shortest path to a working result.",
+      contactTelegram: "Email me",
+      contactPortfolio: "Portfolio",
+      contactBotHint: "Inbound only through the request form or email.",
+      contactVisitorLink: "Open bot",
+      formName: "Name",
+      formNamePh: "How should I address you",
+      formContact: "Telegram or email",
+      formContactPh: "@username or email",
+      formMessage: "Task",
+      formMessagePh: "What exists now, desired outcome, where the routine hurts most",
+      formSubmit: "Send request",
+      formLegal: "By sending the form you agree we use your name and contact only to reply. No newsletters.",
+      cvBack: "← Back to site",
+      cvDownload: "Download PDF",
+      cvProfile: "Profile",
+      cvProfileText:
+        "Python developer and system administrator with hands-on automation, Telegram bots, Linux servers, systemd, Docker/Podman, Proxmox and monitoring experience. I maintain 120+ Windows/Linux workstations and build my own bot and DevOps projects.",
+      cvExperience: "Experience",
+      cvJob1: "VIA Vayar — IT department programmer",
+      cvJob1Meta: "present",
+      cvJob1Item1: "Administration of 120+ Windows and Linux workstations.",
+      cvJob1Item2: "Internal Python scripts for routine automation.",
+      cvJob1Item3: "Network support: TCP/IP, DNS, OSPF, ISDN, Ethernet.",
+      cvJob1Item4: "Ubuntu servers, systemd and service maintenance.",
+      cvJob2: "Military unit 25886 — radio squad commander R-137",
+      cvJob2Text: "Conscript service, experience leading people, discipline and technical processes.",
+      cvJob3: "558 Aircraft Repair Plant — aircraft electrical equipment fitter",
+      cvJob3Text: "Engineering practice, attention to detail and technical documentation.",
+      cvProjects: "Key projects",
+      cvSkills: "Technical skills",
+      cvSkillsText1:
+        "Python, PHP, HTML, CSS, Flask, Telegram Bot API, Telethon, Notion API, Anthropic Claude API, MySQL, SQLite, Git/GitHub.",
+      cvSkillsText2:
+        "Linux Ubuntu, Docker, Podman, Proxmox, LXC, systemd, WireGuard VPN, Terraform, Ansible, CI/CD, Prometheus, Grafana.",
+      cvEducation: "Education",
+      cvEducation1: "Higher education: engineer, management specialist.",
+      cvEducation2: "TeachMeSkills — DevOps Engineer, 228 academic hours, May–December 2025.",
+      cvEducation3: "Self-study: Proxmox, ZStack Cloud Platform, Python automation.",
+      backTop: "Top",
+      backTopAria: "Back to top",
+      footerCopy: "© 2026 Yehhi Aleksandra",
+      modalClose: "Close",
+      modalCloseAria: "Close",
+      pageTitle: "Yehhi Aleksandra | media automation, B2B",
+      pageDescription:
+        "Yehhi Aleksandra, Minsk: B2B media automation. 5+ channels, 30+ planned posts per month, TEXT+IMAGE and VIDEO pipelines, Telegram auto-publish.",
+      ogTitle: "Yehhi Aleksandra | media automation",
+      ogDescription:
+        "Python developer, DevOps engineer and system administrator from Minsk. Bots, automation, servers and monitoring.",
+      jsonLdName: "Yehhi Aleksandra",
+      jsonLdDescription:
+        "Media automation and B2B content from Minsk. 5+ channels, 30+ posts per month, TEXT+IMAGE and VIDEO pipelines.",
+      serviceBotMailSubject: "Telegram bot",
+      serviceAutomationMailSubject: "Python automation",
+      serviceDeployMailSubject: "Deploy and servers",
+      serviceMonitoringMailSubject: "Monitoring",
+      metricsAria: "Key metrics",
+      workFilterAria: "Work filter",
     },
+    ru: {},
   };
 
-  var russianDefaults = {};
+  function nodeText(node) {
+    return (node.innerText || node.textContent || "").replace(/\s+/g, " ").trim();
+  }
 
   function collectRussianDefaults() {
-    var ru = document.querySelector("[data-locale-switch=\"ru\"]");
-    if (!ru) {
-      return;
-    }
-    var strings = dictionary.ru;
-    if (!strings) {
-      strings = {};
-      dictionary.ru = strings;
-    }
-    var els = document.querySelectorAll("[data-i18n]");
-    Array.prototype.forEach.call(els, function (el) {
-      var key = el.getAttribute("data-i18n");
-      if (key && !strings[key]) {
-        strings[key] = el.textContent || el.innerText || "";
+    var nodes = document.querySelectorAll("[data-i18n]");
+    Array.prototype.forEach.call(nodes, function (node) {
+      var key = node.getAttribute("data-i18n");
+      if (!dictionary.ru[key]) {
+        dictionary.ru[key] = nodeText(node);
       }
     });
-    var summaries = document.querySelectorAll("summary[data-i18n]");
-    Array.prototype.forEach.call(summaries, function (s) {
-      var key = s.getAttribute("data-i18n");
-      if (key && !strings[key]) {
-        strings[key] = s.textContent || s.innerText || "";
+
+    var placeholders = document.querySelectorAll("[data-i18n-placeholder]");
+    Array.prototype.forEach.call(placeholders, function (node) {
+      var key = node.getAttribute("data-i18n-placeholder");
+      if (!dictionary.ru[key]) {
+        dictionary.ru[key] = node.getAttribute("placeholder") || "";
       }
     });
+
+    var ariaNodes = document.querySelectorAll("[data-i18n-aria]");
+    Array.prototype.forEach.call(ariaNodes, function (node) {
+      var key = node.getAttribute("data-i18n-aria");
+      if (!dictionary.ru[key]) {
+        dictionary.ru[key] = node.getAttribute("aria-label") || "";
+      }
+    });
+
+    var altNodes = document.querySelectorAll("[data-i18n-alt]");
+    Array.prototype.forEach.call(altNodes, function (node) {
+      var key = node.getAttribute("data-i18n-alt");
+      if (!dictionary.ru[key]) {
+        dictionary.ru[key] = node.getAttribute("alt") || "";
+      }
+    });
+
+    var jsonLd = document.getElementById("person-jsonld");
+    if (jsonLd) {
+      try {
+        var data = JSON.parse(jsonLd.textContent);
+        if (!dictionary.ru.jsonLdName && data.name) {
+          dictionary.ru.jsonLdName = data.name;
+        }
+        if (!dictionary.ru.jsonLdDescription && data.description) {
+          dictionary.ru.jsonLdDescription = data.description;
+        }
+      } catch (error) {}
+    }
+
+    if (!dictionary.ru.serviceBotMailSubject) {
+      dictionary.ru.serviceBotMailSubject = "Telegram-бот";
+      dictionary.ru.serviceAutomationMailSubject = "Python-автоматизация";
+      dictionary.ru.serviceDeployMailSubject = "Деплой и серверы";
+      dictionary.ru.serviceMonitoringMailSubject = "Мониторинг";
+    }
   }
 
   function setText(selector, locale) {
     var strings = dictionary[locale] || dictionary.ru;
-    var els = document.querySelectorAll(selector);
-    Array.prototype.forEach.call(els, function (el) {
-      var key = el.getAttribute("data-i18n");
-      if (key && strings[key] !== undefined) {
-        if (el.tagName === "SUMMARY" || el.tagName === "BUTTON" || el.tagName === "A" || el.tagName === "SPAN" || el.tagName === "H1" || el.tagName === "H2" || el.tagName === "H3" || el.tagName === "P" || el.tagName === "LI" || el.tagName === "LABEL" || el.tagName === "MARK" || el.tagName === "STRONG" || el.tagName === "SMALL" || el.tagName === "OUTPUT") {
-          el.textContent = strings[key];
-        } else {
-          el.innerHTML = strings[key];
-        }
+    var nodes = document.querySelectorAll(selector);
+    Array.prototype.forEach.call(nodes, function (node) {
+      var key = node.getAttribute("data-i18n");
+      if (!key || !strings[key]) {
+        return;
       }
+      var value = strings[key];
+      if (node.tagName === "TIME") {
+        node.textContent = value;
+        return;
+      }
+      node.textContent = value;
     });
   }
 
   function setPlaceholders(locale) {
     var strings = dictionary[locale] || dictionary.ru;
-    var els = document.querySelectorAll("[data-i18n-placeholder]");
-    Array.prototype.forEach.call(els, function (el) {
-      var key = el.getAttribute("data-i18n-placeholder");
-      if (key && strings[key]) {
-        el.setAttribute("placeholder", strings[key]);
+    var nodes = document.querySelectorAll("[data-i18n-placeholder]");
+    Array.prototype.forEach.call(nodes, function (node) {
+      var key = node.getAttribute("data-i18n-placeholder");
+      if (strings[key]) {
+        node.setAttribute("placeholder", strings[key]);
       }
     });
   }
 
   function setAriaLabels(locale) {
     var strings = dictionary[locale] || dictionary.ru;
-    var els = document.querySelectorAll("[data-i18n-aria]");
-    Array.prototype.forEach.call(els, function (el) {
-      var key = el.getAttribute("data-i18n-aria");
-      if (key && strings[key]) {
-        el.setAttribute("aria-label", strings[key]);
+    var nodes = document.querySelectorAll("[data-i18n-aria]");
+    Array.prototype.forEach.call(nodes, function (node) {
+      var key = node.getAttribute("data-i18n-aria");
+      if (strings[key]) {
+        node.setAttribute("aria-label", strings[key]);
       }
     });
   }
 
   function setAlts(locale) {
     var strings = dictionary[locale] || dictionary.ru;
-    var els = document.querySelectorAll("[data-i18n-alt]");
-    Array.prototype.forEach.call(els, function (el) {
-      var key = el.getAttribute("data-i18n-alt");
-      if (key && strings[key]) {
-        el.setAttribute("alt", strings[key]);
+    var nodes = document.querySelectorAll("[data-i18n-alt]");
+    Array.prototype.forEach.call(nodes, function (node) {
+      var key = node.getAttribute("data-i18n-alt");
+      if (strings[key]) {
+        node.setAttribute("alt", strings[key]);
       }
     });
   }
@@ -265,15 +420,17 @@
   function setMailtoSubjects(locale) {
     var strings = dictionary[locale] || dictionary.ru;
     var map = {
-      "owner-telegram-link": "contactTelegram",
-      "task-link": "taskButton",
+      serviceBotLink: "serviceBotMailSubject",
+      serviceAutomationLink: "serviceAutomationMailSubject",
+      serviceDeployLink: "serviceDeployMailSubject",
+      serviceMonitoringLink: "serviceMonitoringMailSubject",
     };
     Object.keys(map).forEach(function (linkKey) {
       var subjectKey = map[linkKey];
       if (!strings[subjectKey]) {
         return;
       }
-      var node = document.querySelector("[data-i18n=\"" + linkKey + "\"]");
+      var node = document.querySelector('[data-i18n="' + linkKey + '"]');
       if (!node || node.tagName !== "A") {
         return;
       }
